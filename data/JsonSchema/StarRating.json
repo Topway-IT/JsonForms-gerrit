@@ -1,0 +1,28 @@
+{
+	"$id": "StarRating",
+	"title": "starrating example",
+	"type": "object",
+	"properties": {
+		"starrating1": {
+			"type": "string",
+			"x-format": "starrating",
+			"title": "Starrating (enum)",
+			"enum": [
+				"Beginner",
+				"Skilled",
+				"Experienced",
+				"Advanced",
+				"Expert"
+			]
+		},
+		"starrating2": {
+			"type": "integer",
+			"x-format": "starrating",
+			"title": "Starrating (integer)",
+			"x-input-config": {
+				"ratingLength": 5
+			}
+		}
+	}
+}
+

@@ -1,0 +1,96 @@
+{
+	"type": "object",
+	"$id": "Core/NewArticleDataOnly",
+	"@type": "JsonForms default schema",
+	"x-compact": true,
+	"x-css-class": "jsonforms-outerform",
+	"required": [],
+	"properties": {
+		"form": {
+			"title": "",
+			"description": "The data will be saved in the main slot as json content-model.",
+			"properties": {
+				"title": {
+					"type": "string",
+					"minLength": 1,
+					"x-input": "mw.widgets.TitleInputWidget"
+				},
+				"schema": {
+					"type": "string",
+					"title": "JSON Schema",
+					"description": "",
+					"default": "",
+					"minLength": 1,
+					"description": "any schema listed {{#querylink: Special:PrefixIndex|here|namespace=2100}}",
+					"x-description-format": "wikitext",
+					"x-enum-provider": "jsonSchemas"
+				},
+				"editor": {
+					"x-dependency": {
+						"path": "schema",
+						"op": "!=",
+						"value": ""
+					},
+					"x-watch": "schema",
+					"x-message": {
+						"x-label-template": "Using schema href=\"{{replace wgArticlePath '$1' 'JsonSchema:'}}{{schema}}\">JsonSchema:{{schema}}<a/>"
+					},
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "JsonSchema:{{schema}}",
+							"x-destroy-values-on-switch": true
+						}
+					]
+				},
+				"categories": {
+					"type": "array",
+					"x-collapsible": true,
+					"items": {
+						"type": "string",
+						"x-input": "categorymultiselect"
+					}
+				}
+			},
+			"required": ["schema", "title"]
+		},
+		"footer": {
+			"x-compact": true,
+			"x-css-class": "jsonforms-outerform-footer",
+			"properties": {
+				"summary": {
+					"type": "string"
+				},
+				"minor": {
+					"type": "boolean",
+					"title": "",
+					"description": "",
+					"description": "This is a [https://www.mediawiki.org/wiki/Help:Minor_edit minor edit]",
+					"x-description-format": "wikitext",
+					"x-input": "checkbox",
+					"x-control-config": {
+						"align": "inline"
+					}
+				},
+				"buttons": {
+					"type": "object",
+					"x-layout": "horizontal",
+					"x-compact": true,
+					"x-css-class": "jsonforms-outerform-footer-buttons",
+					"properties": {
+						"submit": {
+							"type": "null",
+							"title": "Save changes",
+							"x-format": "button",
+							"x-button-action": "submitButton",
+							"x-input-config": {
+								"flags": ["primary", "progressive"]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

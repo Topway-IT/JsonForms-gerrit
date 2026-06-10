@@ -1,0 +1,90 @@
+{
+	"$id": "SurveyPeople",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "People Statistics Table",
+	"description": "Data schema with districts as top-level rows, gender as row subgroups, and education × employment as columns",
+	"type": "object",
+	"x-layout": "survey",
+	"definitions": {
+		"input": {
+			"type": "number",
+			"x-input-config": {
+				"labelPosition": "before",
+				"label": "%",
+				"step": "0.1",
+				"showButtons": false
+			}
+		},
+		"columnGroup": {
+			"type": "object",
+			"layout": "column",
+			"properties": {
+				"employed": {
+					"$ref": "#/definitions/input",
+					"type": "object"
+				},
+				"unemployed": {
+					"$ref": "#/definitions/input",
+					"type": "object"
+				}
+			},
+			"required": []
+		},
+		"rowGroup": {
+			"type": "object",
+			"layout": "row",
+			"properties": {
+				"male": {
+					"$ref": "#/definitions/rowSubgroup",
+					"type": "object"
+				},
+				"female": {
+					"$ref": "#/definitions/rowSubgroup",
+					"type": "object"
+				},
+				"diverse": {
+					"$ref": "#/definitions/rowSubgroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"male",
+				"female",
+				"diverse"
+			]
+		},
+		"rowSubgroup": {
+			"type": "object",
+			"layout": "row",
+			"properties": {
+				"with university degree": {
+					"$ref": "#/definitions/columnGroup",
+					"type": "object"
+				},
+				"without university degree": {
+					"$ref": "#/definitions/columnGroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"with university degree",
+				"without university degree"
+			]
+		}
+	},
+	"properties": {
+		"District 1": {
+			"$ref": "#/definitions/rowGroup",
+					"type": "object"
+		},
+		"District 2": {
+			"$ref": "#/definitions/rowGroup",
+					"type": "object"
+		}
+	},
+	"required": [
+		"District 1",
+		"District 2"
+	]
+}
+

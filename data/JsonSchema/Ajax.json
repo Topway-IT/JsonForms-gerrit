@@ -1,0 +1,23 @@
+{
+	"$id": "Ajax",
+	"type": "array",
+	"title": "People",
+	"x-layout": "tabs",
+	"items": {
+		"title": "Person",
+		"x-title-template": "{{i}} - {{self.name}}",
+		"anyOf": [
+			{
+				"$ref": "JsonSchema:BasicPerson",
+				"title": "Basic Person",
+				"type": "object"
+			},
+			{
+				"$ref": "JsonSchema:Person",
+				"title": "Complex Person",
+				"type": "object"
+			}
+		]
+	}
+}
+

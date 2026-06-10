@@ -1,0 +1,83 @@
+{
+	"$id": "Person",
+	"$ref": "JsonSchema:BasicPerson",
+	"type": "object",
+	"x-layout": "booklet",
+	"properties": {
+		"location": {
+			"type": "object",
+			"title": "Location",
+			"properties": {
+				"city": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+				"citystate": {
+					"type": "string",
+					"description": "This is generated automatically from the previous two fields",
+					"x-template": "{{city}}, {{state}}",
+					"x-watch": [
+						"city",
+						"state"
+					]
+				}
+			}
+		},
+		"pets": {
+			"type": "array",
+			"x-layout": "table",
+			"title": "Pets",
+			"uniqueItems": true,
+			"items": {
+				"type": "object",
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": [
+							"cat",
+							"dog",
+							"bird",
+							"reptile",
+							"other"
+						],
+						"default": "dog"
+					},
+					"name": {
+						"type": "string"
+					},
+					"fixed": {
+						"type": "boolean",
+						"title": "spayed / neutered",
+						"x-input": "OO.ui.CheckboxInputWidget"
+					}
+				}
+			}
+		},
+		"cars": {
+			"type": "array",
+			"x-layout": "tabs",
+			"title": "Cars",
+			"uniqueItems": false,
+			"items": {
+				"type": "object",
+				"title": "Car",
+				"additionalProperties": true,
+				"x-additional-properties-ui": {
+					"label": "New property",
+					"schema": "JsonSchema:MetaSchema/NewProperty"
+				},
+				"properties": {
+					"manufacturer": {
+						"type": "string"
+					},
+					"model": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
+

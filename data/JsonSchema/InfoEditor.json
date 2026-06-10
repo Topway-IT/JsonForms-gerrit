@@ -1,0 +1,27 @@
+{
+	"$id": "InfoEditor",
+	"type": "object",
+	"title": "Info Test Case",
+	"properties": {
+		"info": {
+			"x-format": "info",
+			"description": "This testcase shows the use of the \u003Cstrong\u003Einfo editor\u003C/strong\u003E. The \u003Cstrong\u003Einfo editor\u003C/strong\u003E is a special editor that leaves no footprint in the form results.\u003Cbr\u003E\u003Cbr\u003EThis editor can be used to insert textual blocks in the form. If the \u003Ca href='https://github.com/cure53/DOMPurify' target='_blank'\u003EDOMPurify library\u003C/a\u003E is loaded you can also use HTML tags.\u003Cul\u003E\u003Cli\u003EThe \u003Cstrong\u003Etitle\u003C/strong\u003E property is used for the header\u003C/li\u003E\u003Cli\u003EThe \u003Cstrong\u003Edescription\u003C/strong\u003E property is used for the bodytext.\u003C/li\u003E\u003C/ul\u003E\u003Chr\u003E"
+		},
+		"test1": {
+			"x-format": "info",
+			"title": "This is the header from the 'title' property",
+			"description": "This is the bodytext from the 'description' property."
+		},
+		"test2": {
+			"x-format": "info",
+			"title": "This is the header from the \u003Cstrong\u003Etitle\u003C/strong\u003E property (With HTML Tags)",
+			"description": "This is the bodytext from the \u003Cstrong\u003Edescription\u003C/strong\u003E property. (With HTML Tags)"
+		},
+		"test3": {
+			"x-format": "info",
+			"title": "This is the header (bodytext used for inserting image)",
+			"description": "\u003Cimg src='https://upload.wikimedia.org/wikipedia/commons/f/fc/2017_Cameron_Balloon_designed_by_Seattle_Ballooning_.jpg' height='150' /\u003E\u003C\u003Cbr /\u003Eair baloon"
+		}
+	}
+}
+

@@ -1,0 +1,110 @@
+{
+	"$id": "Payment",
+	"title": "Payment Method",
+	"x-input": "OO.ui.ButtonSelectWidget",
+	"oneOf": [
+		{
+			"title": "None",
+			"type": "object",
+			"properties": {
+				"method": {
+					"type": "string",
+					"x-hidden": true,
+					"enum": [
+						"none"
+					]
+				}
+			},
+			"required": [
+				"method"
+			],
+			"options": {
+				"hidden": true
+			}
+		},
+		{
+			"title": "Bank EFT",
+			"type": "object",
+			"x-layout": "horizontal",
+			"properties": {
+				"method": {
+					"type": "string",
+					"enum": [
+						"eft"
+					],
+					"x-hidden": true
+				},
+				"bankName": {
+					"title": "Bank name",
+					"type": "string",
+					"minLength": 5
+				},
+				"routingNumber": {
+					"title": "Routing number",
+					"type": "string",
+					"minLength": 9
+				},
+				"accountNumber": {
+					"title": "Account number",
+					"type": "string",
+					"minLength": 12
+				}
+			},
+			"required": [
+				"method",
+				"bankName",
+				"routingNumber",
+				"accountNumber"
+			]
+		},
+		{
+			"title": "Credit Card",
+			"type": "object",
+			"x-layout": "horizontal",
+			"properties": {
+				"method": {
+					"type": "string",
+					"x-hidden": true,
+					"enum": [
+						"creditCard"
+					]
+				},
+				"cardType": {
+					"title": "Card type",
+					"type": "string",
+					"enum": [
+						"Amex",
+						"Discover",
+						"MasterCard",
+						"Visa"
+					]
+				},
+				"cardNumber": {
+					"title": "Card number",
+					"type": "string",
+					"minLength": 15,
+					"maxLength": 16
+				},
+				"expiration": {
+					"title": "Expiration month",
+					"type": "string",
+					"x-format": "month"
+				},
+				"CCV": {
+					"type": "string",
+					"maxLength": 4,
+					"minLength": 3,
+					"pattern": "[0-9]*"
+				}
+			},
+			"required": [
+				"method",
+				"cardType",
+				"cardNumber",
+				"expiration",
+				"CCV"
+			]
+		}
+	]
+}
+

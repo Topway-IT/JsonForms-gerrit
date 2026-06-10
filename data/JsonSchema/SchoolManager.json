@@ -1,0 +1,82 @@
+{
+	"$id": "SchoolManager",
+	"title": "SchoolManager",
+	"type": "array",
+	"x-layout": "tabs",
+	"items": {
+		"type": "object",
+		"title": "School District",
+		"properties": {
+			"name": {
+				"type": "string",
+				"x-format": "text",
+				"title": "Name"
+			},
+			"school district manager": {
+				"type": "string",
+				"x-format": "text",
+				"title": "School District Manager"
+			},
+			"schools": {
+				"type": "array",
+				"x-layout": "booklet",
+				"items": {
+					"type": "object",
+					"title": "School",
+					"properties": {
+						"name": {
+							"type": "string",
+							"x-format": "text",
+							"title": "Name"
+						},
+						"description": {
+							"type": "string",
+							"x-format": "textarea",
+							"title": "Description"
+						},
+						"school principal": {
+							"type": "string",
+							"x-format": "text",
+							"title": "School Principal"
+						},
+						"number_of_pupils": {
+							"type": "integer",
+							"title": "number of pupils"
+						},
+						"teachers": {
+							"type": "array",
+							"title": "Teachers",
+							"uniqueItems": true,
+							"items": {
+								"type": "string",
+								"x-format": "text",
+								"title": "Teacher"
+							}
+						},
+						"classes": {
+							"type": "array",
+							"x-layout": "tabs",
+							"items": {
+								"type": "object",
+								"title": "School Class",
+								"properties": {
+									"class": {
+										"type": "string",
+										"x-format": "text",
+										"title": "Class"
+									},
+									"class teacher": {
+										"type": "string",
+										"x-format": "text",
+										"title": "Class Teacher"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

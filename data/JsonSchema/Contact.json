@@ -1,0 +1,248 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "Contact",
+	"title": "Contact",
+	"description": "A contact person or entity",
+	"type": "object",
+	"x-default-properties": [
+		"name",
+		"email",
+		"phone",
+		"address",
+		"links",
+		"notes"
+	],
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"name": {
+						"type": "object"
+					}
+				}
+			},
+			"then": {
+				"properties": {
+					"fullname": {
+						"type": "string",
+						"title": "Full Name",
+						"description": "Computed full name",
+						"x-watch": [
+							"name.salutation",
+							"name.first_name",
+							"name.middle_name",
+							"name.last_name",
+							"name.suffix"
+						],
+						"x-template": "{{name.salutation}} {{name.first_name}} {{name.middle_name}} {{name.last_name}} {{name.suffix}}"
+					}
+				}
+			},
+			"else": {
+				"properties": {
+					"fullname": {
+						"type": "string",
+						"title": "Full Name",
+						"description": "Computed full name",
+						"x-watch": [
+							"name"
+						],
+						"x-template": "{{name}}"
+					}
+				}
+			}
+		}
+	],
+	"properties": {
+		"fullname": {
+			"type": "string",
+			"title": "Full Name",
+			"description": "Computed full name"
+		},
+		"name": {
+			"oneOf": [
+				{
+					"type": "string",
+					"title": "Simple Name",
+					"description": "Full name as a single string"
+				},
+				{
+					"type": "object",
+					"title": "Detailed Name",
+					"description": "Detailed name components",
+					"x-default-properties": [
+						"first_name",
+						"last_name"
+					],
+					"properties": {
+						"salutation": {
+							"type": "string",
+							"title": "Salutation",
+							"description": "Salutation (e.g., Mr., Ms., Dr.)"
+						},
+						"first_name": {
+							"type": "string",
+							"title": "First Name",
+							"description": "First name of the contact"
+						},
+						"middle_name": {
+							"type": "string",
+							"title": "Middle Name",
+							"description": "Middle name of the contact"
+						},
+						"last_name": {
+							"type": "string",
+							"title": "Last Name",
+							"description": "Last name of the contact"
+						},
+						"nickname": {
+							"type": "string",
+							"title": "Nickname",
+							"description": "Nickname or preferred name"
+						},
+						"initials": {
+							"type": "string",
+							"title": "Initials",
+							"description": "Initials of the contact"
+						},
+						"suffix": {
+							"type": "string",
+							"title": "Suffix",
+							"description": "Suffix (e.g., Jr., Sr., III)"
+						}
+					}
+				}
+			],
+			"title": "Name",
+			"description": "Contact name - either a simple string or an object with detailed name components"
+		},
+		"notes": {
+			"type": "string",
+			"x-format": "textarea",
+			"title": "Notes",
+			"description": "Additional notes about the contact"
+		},
+		"email": {
+			"type": "array",
+			"title": "Email Addresses",
+			"items": {
+				"type": "string",
+				"format": "email",
+				"title": "Email Address",
+				"description": "An email address"
+			},
+			"minItems": 0,
+			"uniqueItems": true,
+			"description": "Email addresses",
+			"default": []
+		},
+		"phone": {
+			"type": "array",
+			"title": "Phone Numbers",
+			"items": {
+				"type": "string",
+				"x-format": "tel",
+				"title": "Phone Number",
+				"pattern": "^[+]?[0-9\\s\\-()]{7,}$",
+				"description": "A phone number"
+			},
+			"minItems": 0,
+			"uniqueItems": true,
+			"description": "Phone numbers",
+			"default": []
+		},
+		"links": {
+			"type": "array",
+			"title": "Links",
+			"items": {
+				"type": "string",
+				"format": "uri",
+				"title": "Link",
+				"description": "A URL link"
+			},
+			"description": "Any useful links (CV, personal blogs, etc.)",
+			"default": []
+		},
+		"picture": {
+			"type": "string",
+			"title": "Picture",
+			"description": "Picture filename or URL (e.g., File:image.jpg)",
+			"pattern": "^(File:|https?://).*"
+		},
+		"language": {
+			"type": "array",
+			"title": "Languages",
+			"items": {
+				"type": "string",
+				"title": "Language",
+				"description": "A language spoken by the contact"
+			},
+			"uniqueItems": true,
+			"description": "Languages spoken by the contact",
+			"default": []
+		},
+		"relationship_since": {
+			"type": "string",
+			"format": "date",
+			"title": "Relationship Since",
+			"description": "First seen date (YYYY-MM-DD)"
+		},
+		"relationship_until": {
+			"type": "string",
+			"format": "date",
+			"title": "Relationship Until",
+			"description": "Last seen date (YYYY-MM-DD)"
+		},
+		"address": {
+			"type": "object",
+			"title": "Address",
+			"x-collapsible": true,
+			"description": "Postal address of the contact",
+			"properties": {
+				"street": {
+					"type": "string",
+					"title": "Street",
+					"description": "Street address"
+				},
+				"city": {
+					"type": "string",
+					"title": "City",
+					"description": "City"
+				},
+				"state": {
+					"type": "string",
+					"title": "State",
+					"description": "State or province"
+				},
+				"postal_code": {
+					"type": "string",
+					"title": "Postal Code",
+					"description": "Postal or ZIP code"
+				},
+				"country": {
+					"type": "string",
+					"title": "Country",
+					"description": "Country"
+				}
+			}
+		},
+		"company": {
+			"type": "string",
+			"title": "Company",
+			"description": "Company name"
+		},
+		"job_title": {
+			"type": "string",
+			"title": "Job Title",
+			"description": "Job title of the contact"
+		},
+		"birthday": {
+			"type": "string",
+			"format": "date",
+			"title": "Birthday",
+			"description": "Birthday in YYYY-MM-DD format"
+		}
+	},
+	"required": []
+}
+

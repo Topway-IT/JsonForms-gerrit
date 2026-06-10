@@ -1,0 +1,105 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "SchemaBuilder/Subitem",
+    "title": "Subitem",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "The name of the item"
+		},
+		"title": {
+			"type": "string",
+			"description": "The title of the item"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"object",
+				"array",
+				"tuple"
+			],
+			"description": "The data type"
+		},
+		"layout": {
+			"type": "string",
+			"description": "Layout configuration that depends on the type"
+		}
+	},
+	"required": [
+		"name",
+		"type"
+	],
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"type": {
+						"const": "object"
+					}
+				},
+				"required": [
+					"type"
+				]
+			},
+			"then": {
+				"properties": {
+					"layout": {
+						"enum": [
+							"vertical",
+							"horizontal",
+							"grid"
+						]
+					}
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"type": {
+						"const": "array"
+					}
+				},
+				"required": [
+					"type"
+				]
+			},
+			"then": {
+				"properties": {
+					"layout": {
+						"enum": [
+							"list",
+							"table",
+							"cards"
+						]
+					}
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"type": {
+						"const": "tuple"
+					}
+				},
+				"required": [
+					"type"
+				]
+			},
+			"then": {
+				"properties": {
+					"layout": {
+						"enum": [
+							"compact",
+							"normal",
+							"relaxed"
+						]
+					}
+				}
+			}
+		}
+	]
+}
+

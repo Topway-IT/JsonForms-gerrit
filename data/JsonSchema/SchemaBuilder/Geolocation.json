@@ -1,0 +1,35 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "SchemaBuilder/Geolocation",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "The name of the location or entity"
+		},
+		"title": {
+			"type": "string",
+			"description": "The title or heading"
+		},
+		"description": {
+			"type": "string",
+			"description": "A detailed description"
+		},
+		"latitudeLabel": {
+			"type": "string",
+			"default": "Latitude",
+			"description": "Label for the latitude field"
+		},
+		"longitudeLabel": {
+			"type": "string",
+			"default": "Longitude",
+			"description": "Label for the longitude field"
+		}
+	},
+	"required": [
+		"name",
+		"longitudeLabel",
+		"latitudeLabel"
+	]
+}
+

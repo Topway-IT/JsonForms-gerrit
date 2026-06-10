@@ -1,0 +1,91 @@
+{
+	"$id": "Person",
+	"type": "object",
+	"properties": {
+		"has_pet": {
+			"title": "Has Pet",
+			"description": "Do you have a pet?",
+			"oneOf": [
+				{
+					"title": "Yes",
+					"const": "yes"
+				},
+				{
+					"title": "No",
+					"const": "no"
+				}
+			],
+			"type": "string"
+		},
+		"pet_name": {
+			"title": "Pet's name",
+			"description": "What's your pet's name?",
+			"type": "string"
+		},
+		"pet_age": {
+			"title": "Pet's age",
+			"description": "What's your pet's age",
+			"type": "number"
+		},
+		"dietary_needs": {
+			"title": "Dietary needs",
+			"description": "What are your pet's dietary needs?",
+			"type": "string"
+		}
+	},
+	"required": [
+		"has_pet"
+	],
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"has_pet": {
+						"const": "yes"
+					}
+				},
+				"required": [
+					"has_pet"
+				]
+			},
+			"then": {
+				"required": [
+					"pet_age",
+					"pet_name"
+				]
+			},
+			"else": {
+				"properties": {
+					"pet_age": false,
+					"pet_name": false
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"has_pet": {
+						"const": "yes"
+					},
+					"pet_age": {
+						"minimum": 5
+					}
+				},
+				"required": [
+					"pet_age"
+				]
+			},
+			"then": {
+				"required": [
+					"dietary_needs"
+				]
+			},
+			"else": {
+				"properties": {
+					"dietary_needs": false
+				}
+			}
+		}
+	]
+}
+

@@ -1,0 +1,81 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "SchemaBuilder/Field",
+	"title": "Field",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string"
+		},
+		"visibility": {
+			"type": "string",
+			"enum": [
+				"visible",
+				"hidden",
+				"readonly",
+				"disabled"
+			],
+			"default": "visible"
+		},
+		"label": {
+			"type": "string"
+		},
+		"helpMessage": {
+			"type": "string"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"string",
+				"number",
+				"integer",
+				"boolean"
+			],
+			"default": "string"
+		},
+		"format": {
+			"type": "string",
+			"enum": [
+				"",
+				"email",
+				"uri",
+				"date",
+				"time",
+				"date-time"
+			],
+			"default": ""
+		},
+		"multiple": {
+			"type": "boolean",
+			"default": false
+		},
+		"input": {
+			"type": "string",
+			"enum": [
+				"text",
+				"textarea",
+				"select",
+				"radio",
+				"checkbox",
+				"number"
+			],
+			"default": "text"
+		},
+		"defaultValue": {
+			"type": [
+				"string",
+				"number",
+				"boolean",
+				"null"
+			]
+		}
+	},
+	"required": [
+		"name",
+		"type"
+	]
+}
+

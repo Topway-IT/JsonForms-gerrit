@@ -1,0 +1,162 @@
+{
+	"$id": "SurveyCities",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "European Countries Statistics Data",
+	"description": "Nested statistical data per country, main city, and employment status",
+	"type": "object",
+	"x-layout": "survey",
+	"definitions": {
+		"inputOptions": {
+			"type": "number",
+			"x-input-config": {
+				"labelPosition": "before",
+				"label": "%",
+				"step": "0.1",
+				"showButtons": false
+			}
+		},
+		"leaf": {
+			"type": "object",
+			"layout": "column",
+			"properties": {
+				"population": {
+					"type": "number",
+					"$ref": "#/definitions/inputOptions"
+				},
+				"avg_age": {
+					"type": "number",
+					"$ref": "#/definitions/inputOptions"
+				},
+				"male_percentage": {
+					"type": "number",
+					"$ref": "#/definitions/inputOptions"
+				},
+				"female_percentage": {
+					"type": "number",
+					"$ref": "#/definitions/inputOptions"
+				}
+			},
+			"required": []
+		},
+		"employmentGroup": {
+			"type": "object",
+			"layout": "row",
+			"properties": {
+				"employed": {
+					"$ref": "#/definitions/leaf",
+					"type": "object"
+				},
+				"unemployed": {
+					"$ref": "#/definitions/leaf",
+					"type": "object"
+				}
+			},
+			"required": [
+				"employed",
+				"unemployed"
+			]
+		},
+		"countryRow": {
+			"type": "object",
+			"layout": "row",
+			"properties": {},
+			"required": []
+		}
+	},
+	"properties": {
+		"UK": {
+			"$ref": "#/definitions/countryRow",
+			"properties": {
+				"London": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Manchester": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Edinburgh": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"London",
+				"Manchester",
+				"Edinburgh"
+			]
+		},
+		"Italy": {
+			"$ref": "#/definitions/countryRow",
+			"properties": {
+				"Rome": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Milan": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Naples": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"Rome",
+				"Milan",
+				"Naples"
+			]
+		},
+		"Austria": {
+			"$ref": "#/definitions/countryRow",
+			"properties": {
+				"Vienna": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Graz": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Salzburg": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"Vienna",
+				"Graz",
+				"Salzburg"
+			]
+		},
+		"Germany": {
+			"$ref": "#/definitions/countryRow",
+			"properties": {
+				"Berlin": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Munich": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				},
+				"Hamburg": {
+					"$ref": "#/definitions/employmentGroup",
+					"type": "object"
+				}
+			},
+			"required": [
+				"Berlin",
+				"Munich",
+				"Hamburg"
+			]
+		}
+	},
+	"required": [
+		"UK",
+		"Italy",
+		"Austria",
+		"Germany"
+	]
+}

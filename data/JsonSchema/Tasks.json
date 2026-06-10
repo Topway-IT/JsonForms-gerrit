@@ -1,0 +1,79 @@
+{
+	"$id": "Tasks",
+	"required": [
+		"title",
+		"priority",
+		"status"
+	],
+	"type": "object",
+	"title": "Task",
+	"properties": {
+		"belongs to": {
+			"type": "string",
+			"x-format": "hidden",
+			"title": "Belongs to"
+		},
+		"title": {
+			"type": "string",
+			"x-format": "text",
+			"title": "Title"
+		},
+		"description": {
+			"type": "string",
+			"x-format": "textarea",
+			"title": "Description",
+			"x-input": "VisualEditor"
+		},
+		"assignee": {
+			"type": "array",
+			"minItems": 1,
+			"uniqueItems": true,
+			"default": [],
+			"items": {
+				"type": "string",
+				"x-input": "mw.widgets.UsersMultiselectWidget",
+				"x-format": "text",
+				"title": "Assignee"
+			}
+		},
+		"due date": {
+			"type": "string",
+			"format": "date",
+			"title": "Due date",
+			"x-input": "mw.widgets.DateInputWidget"
+		},
+		"priority": {
+			"type": "string",
+			"x-format": "text",
+			"title": "Priority",
+			"default": "normal",
+			"enum": [
+				"high",
+				"normal",
+				"low"
+			],
+			"x-input": "OO.ui.RadioSelectInputWidget"
+		},
+		"status": {
+			"type": "string",
+			"x-format": "text",
+			"title": "Status",
+			"enum": [
+				"open",
+				"in progress",
+				"completed",
+				"discarded"
+			],
+			"x-input": "OO.ui.RadioSelectInputWidget"
+		},
+		"created by": {
+			"type": "string",
+			"x-format": "hidden"
+		},
+		"created at": {
+			"type": "string",
+			"x-format": "hidden"
+		}
+	}
+}
+
