@@ -176,7 +176,7 @@
 				"libs/handlebars.min.js",
 				"libs/split.min.js",
 				"libs/intl-tel-input/js/intlTelInput.js",
-				"../../../../mediawiki-1.44.0/extensions/JsonForms - build/resources/json-editor/dist/nonmin/jsoneditor.js",
+				"editor/jsonforms-editor.js",
 				"JsonForms.js",
 				"Utilities.js",
 				"EnumProviders.js",
