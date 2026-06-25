@@ -1,0 +1,32 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/DemoForm",
+	"title": "Demo",
+	"x-watch" : "schema",
+	"x-message": {
+		"x-label-template": "This form is based on the schema <a target=\"blank\" href=\"{{replace wgArticlePath '$1' 'JsonSchema:Core/DemoForm'}}\">JsonSchema:Core/DemoForm</a>"
+	},
+	"properties": {
+		"schema": {
+			"type": "string",
+			"title": "schema",
+			"default": "",
+			"x-enum-provider": "jsonSchemas"
+		},
+		"editor": {
+			"x-message": {
+				"x-label-template": "This form is based on the schema <a target=\"blank\" href=\"{{replace wgArticlePath '$1' 'JsonSchema:'}}{{schema}}\">JsonSchema:{{schema}}</a>"
+			},
+			"x-compact": "true",
+			"x-watch" : "schema",
+			"links": [
+				{
+					"rel": "describedBy",
+					"href": "JsonSchema:{{schema}}",
+					"x-destroy-values-on-switch": true
+				}
+			]
+		}
+	}
+}
+

@@ -1,0 +1,1296 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SchemaBuilder/InputOptions",
+	"title": "Input config",
+	"type": "object",
+	"definitions": {
+		"commonProperties": {
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				}
+			}
+		},
+		"textInputProperties": {
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"autocomplete": {
+					"type": "boolean",
+					"description": "Should the browser support autocomplete for this field?"
+				},
+				"autofocus": {
+					"type": "boolean",
+					"description": "Use an HTML autofocus attribute to instruct the browser to focus this widget."
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"flags": {
+					"type": "string",
+					"description": "The name or names of the flags (e.g., 'progressive' or 'primary') to apply."
+				},
+				"icon": {
+					"type": "string",
+					"description": "The symbolic name of the icon (e.g., 'remove' or 'menu'), or a map of symbolic names."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"indicator": {
+					"type": "string",
+					"description": "Symbolic name of the indicator (e.g. 'required' or 'down')."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"invisibleLabel": {
+					"type": "boolean",
+					"description": "Whether the label should be visually hidden (but still accessible to screen-readers)."
+				},
+				"label": {
+					"type": "string",
+					"description": "The label text"
+				},
+				"labelPosition": {
+					"type": "string",
+					"description": "The position of the inline label relative to that of the value or placeholder text: 'before' or 'after'",
+					"enum": ["before", "after"]
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Maximum number of characters allowed in the input."
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Minimum number of characters allowed in the input."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"placeholder": {
+					"type": "string",
+					"description": "Placeholder text"
+				},
+				"readOnly": {
+					"type": "boolean",
+					"description": "Prevent changes to the value of the text input."
+				},
+				"spellcheck": {
+					"type": "boolean",
+					"description": "Should the browser support spellcheck for this field (undefined means leaving it up to the browser)."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				},
+				"type": {
+					"type": "string",
+					"description": "The value of the HTML type attribute: 'text', 'password', 'email', 'url' or 'number'.",
+					"enum": ["text", "password", "email", "url", "number"]
+				},
+				"validate": {
+					"type": "string",
+					"description": "A regular expression that must match the value for it to be considered valid. See \u003Ca target=\"_blank\" href=\"https://json-schema.org/understanding-json-schema/reference/regular_expressions\"\u003ERegular Expressions\u003C/a\u003E",
+					"x-description-format": "html"
+				}
+			}
+		},
+		"OO.ui.TextInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.TextInputWidget OO.ui.TextInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				}
+			]
+		},
+		"mw.widgets.DateInputWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"precision": {
+							"type": "string",
+							"description": "Date precision to use, 'day' or 'month'",
+							"enum": ["day", "month"]
+						},
+						"inputFormat": {
+							"type": "string",
+							"description": "Date format string to use for the textual input field"
+						},
+						"displayFormat": {
+							"type": "string",
+							"description": "Date format string to use for the clickable label"
+						},
+						"longDisplayFormat": {
+							"type": "boolean",
+							"description": "If a custom displayFormat is not specified, use unabbreviated day of the week and month names in the default language-specific displayFormat"
+						},
+						"placeholderLabel": {
+							"type": "string",
+							"description": "Placeholder text shown when the widget is not"
+						},
+						"placeholderDateFormat": {
+							"type": "string",
+							"description": "User-visible date format string displayed in the textual input field when it's empty"
+						},
+						"mustBeAfter": {
+							"type": "string",
+							"format": "date",
+							"description": "Validates the date to be after this"
+						},
+						"mustBeBefore": {
+							"type": "string",
+							"format": "date",
+							"description": "Validates the date to be before this"
+						}
+					}
+				}
+			]
+		},
+		"mw.widgets.TitleInputWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of results to show"
+						},
+						"maxLength": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "Maximum query length"
+						},
+						"namespace": {
+							"type": "integer",
+							"description": "Namespace to prepend to queries"
+						},
+						"relative": {
+							"type": "boolean",
+							"description": "If a namespace is set, display titles relative to it"
+						},
+						"suggestions": {
+							"type": "boolean",
+							"description": "Display search suggestions"
+						},
+						"showRedirectTargets": {
+							"type": "boolean",
+							"description": "Show the targets of redirects"
+						},
+						"showImages": {
+							"type": "boolean",
+							"description": "Show page images"
+						},
+						"showDescriptions": {
+							"type": "boolean",
+							"description": "Show page descriptions"
+						},
+						"showDisambigsLast": {
+							"type": "boolean",
+							"description": "Show disambiguation pages as the last results"
+						},
+						"showMissing": {
+							"type": "boolean",
+							"description": "Show missing pages"
+						},
+						"showInterwikis": {
+							"type": "boolean",
+							"description": "Show pages with a valid interwiki prefix"
+						},
+						"addQueryInput": {
+							"type": "boolean",
+							"description": "Add exact user's input query to results"
+						},
+						"excludeCurrentPage": {
+							"type": "boolean",
+							"description": "Exclude the current page from suggestions"
+						},
+						"creatable": {
+							"type": "boolean",
+							"description": "Exclude pages whose namespace is negative"
+						},
+						"validateTitle": {
+							"type": "boolean",
+							"description": "Whether the input must be a valid title"
+						},
+						"required": {
+							"type": "boolean",
+							"description": "Whether the input must not be empty"
+						},
+						"highlightSearchQuery": {
+							"type": "boolean",
+							"description": "Highlight the partial query the user used for this title"
+						}
+					}
+				}
+			]
+		},
+		"mw.widgets.UserInputWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				},
+				{
+					"properties": {
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of results to show"
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.ToggleSwitchWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.ToggleSwitchWidget OO.ui.ToggleSwitchWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				},
+				{
+					"flags": {
+						"type": "string",
+						"description": "The name or names of the flags (e.g., 'progressive' or 'primary') to apply."
+					}
+				}
+			]
+		},
+		"OO.ui.ButtonWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.ButtonWidget OO.ui.ButtonWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"flags": {
+							"type": "array",
+							"description": "The name or names of the flags (e.g., 'progressive' or 'primary') to apply.",
+							"items": {
+								"type": "string",
+								"x-input": "OO.ui.TagMultiselectWidget"
+							}
+						},
+						"framed": {
+							"type": "boolean",
+							"description": "Render the button with a frame"
+						},
+						"href": {
+							"type": "string",
+							"description": "Hyperlink to visit when the button is clicked."
+						},
+						"icon": {
+							"type": "string",
+							"description": "The symbolic name of the icon (e.g., 'remove' or 'menu'), or a map of symbolic names."
+						},
+						"indicator": {
+							"type": "string",
+							"description": "Symbolic name of the indicator (e.g., 'down' or 'up')."
+						},
+						"invisibleLabel": {
+							"type": "boolean",
+							"description": "Whether the label should be visually hidden (but still accessible to screen-readers)."
+						},
+						"label": {
+							"type": "string",
+							"description": "The label text."
+						},
+						"noFollow": {
+							"type": "boolean",
+							"description": "Search engine traversal hint"
+						},
+						"rel": {
+							"type": ["string", "array"],
+							"description": "Relationship attributes for the hyperlink",
+							"items": {
+								"type": "string"
+							}
+						},
+						"tabIndex": {
+							"type": ["string", "number", "null"],
+							"description": "Number that specifies the element's position in the tab-navigation order (e.g., 1 for the first focusable element)."
+						},
+						"target": {
+							"type": "string",
+							"description": "The frame or window in which to open the hyperlink."
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.RadioSelectInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.RadioSelectInputWidget OO.ui.RadioSelectInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text"
+				}
+			}
+		},
+		"numberInputProperties": {
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"autocomplete": {
+					"type": "boolean",
+					"description": "Should the browser support autocomplete for this field?"
+				},
+				"autofocus": {
+					"type": "boolean",
+					"description": "Use an HTML autofocus attribute to instruct the browser to focus this widget."
+				},
+				"buttonStep": {
+					"type": "integer",
+					"description": "Delta when using the buttons or Up/Down arrow keys"
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"flags": {
+					"type": "string",
+					"description": "The name or names of the flags (e.g., 'progressive' or 'primary') to apply."
+				},
+				"icon": {
+					"type": "string",
+					"description": "The symbolic name of the icon (e.g., 'remove' or 'menu'), or a map of symbolic names."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"indicator": {
+					"type": "string",
+					"description": "Symbolic name of the indicator (e.g. 'required' or 'down')."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"invisibleLabel": {
+					"type": "boolean",
+					"description": "Whether the label should be visually hidden (but still accessible to screen-readers)."
+				},
+				"label": {
+					"type": "string",
+					"description": "The label text"
+				},
+				"labelPosition": {
+					"type": "string",
+					"description": "The position of the inline label relative to that of the value or placeholder text: 'before' or 'after'",
+					"enum": ["before", "after"]
+				},
+				"max": {
+					"type": "number",
+					"description": "Maximum allowed value"
+				},
+				"maxLength": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Maximum number of characters allowed in the input."
+				},
+				"min": {
+					"type": "number",
+					"description": "Minimum allowed value"
+				},
+				"minLength": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "Minimum number of characters allowed in the input."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"pageStep": {
+					"type": "integer",
+					"description": "Delta when using the Page-up/Page-down keys. Defaults to 10 times buttonStep"
+				},
+				"placeholder": {
+					"type": "string",
+					"description": "Placeholder text"
+				},
+				"readOnly": {
+					"type": "boolean",
+					"description": "Prevent changes to the value of the text input."
+				},
+				"showButtons": {
+					"type": "boolean",
+					"description": "Whether to show the plus and minus buttons."
+				},
+				"spellcheck": {
+					"type": "boolean",
+					"description": "Should the browser support spellcheck for this field (undefined means leaving it up to the browser)."
+				},
+				"step": {
+					"type": "integer",
+					"description": "If specified, the field only accepts values that are multiples of this."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				},
+				"type": {
+					"type": "string",
+					"description": "The value of the HTML type attribute: 'text', 'password', 'email', 'url' or 'number'.",
+					"enum": ["text", "password", "email", "url", "number"]
+				},
+				"validate": {
+					"type": "string",
+					"description": "A regular expression that must match the value for it to be considered valid"
+				}
+			}
+		},
+		"OO.ui.NumberInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.NumberInputWidget OO.ui.NumberInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/numberInputProperties"
+				}
+			]
+		},
+		"multiselectWidgetProperties": {
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"allowArbitrary": {
+					"type": "boolean",
+					"description": "Allow data items to be added even if not present in the menu."
+				},
+				"allowDisplayInvalidTags": {
+					"type": "boolean",
+					"description": "Allow the display of invalid tags."
+				},
+				"allowDuplicates": {
+					"type": "boolean",
+					"description": "Allow duplicate items to be added"
+				},
+				"allowEditTags": {
+					"type": "boolean",
+					"description": "Allow editing of the tags by clicking them"
+				},
+				"allowReordering": {
+					"type": "boolean",
+					"description": "Allow reordering of the items"
+				},
+				"allowedValues": {
+					"type": "array",
+					"description": "An array representing the allowed items by their datas"
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"draggable": {
+					"type": "boolean",
+					"description": "The items are draggable."
+				},
+				"flags": {
+					"type": "string",
+					"description": "The name or names of the flags (e.g., 'progressive' or 'primary') to apply."
+				},
+				"icon": {
+					"type": "string",
+					"description": "The symbolic name of the icon (e.g., 'remove' or 'menu'), or a map of symbolic names."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"indicator": {
+					"type": "string",
+					"description": "Symbolic name of the indicator (e.g. 'required' or 'down')."
+				},
+				"inputPosition": {
+					"type": "string",
+					"description": "Position of the input. Options are: - inline: The input is invisible, but exists inside the tag list, so the user types into the tag groups to add tags. - outline: The input is underneath the tag area. - none: No input supplied",
+					"enum": ["inline", "outline", "none"]
+				},
+				"orientation": {
+					"type": "string",
+					"description": "Item orientation: 'horizontal' or 'vertical'.",
+					"enum": ["horizontal", "vertical"]
+				},
+				"placeholder": {
+					"type": "string",
+					"description": "Placeholder text"
+				},
+				"tagLimit": {
+					"type": "integer",
+					"minimum": 0,
+					"description": "An optional limit on the number of selected options"
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text"
+				}
+			}
+		},
+		"mw.widgets.UsersMultiselectWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of results to show"
+						},
+						"ipAllowed": {
+							"type": "boolean",
+							"description": "Show IP addresses in autocomplete menu"
+						},
+						"ipRangeLimits": {
+							"type": "object",
+							"properties": {
+								"IPv4": {
+									"type": "integer",
+									"description": "Maximum allowed IPv4 range"
+								},
+								"IPv6": {
+									"type": "integer",
+									"description": "Maximum allowed IPv6 range"
+								}
+							}
+						}
+					}
+				}
+			]
+		},
+		"mw.widgets.TitlesMultiselectWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"clearInputOnChoose": {
+							"type": "boolean",
+							"description": "Clear input on choose"
+						},
+						"inputPosition": {
+							"type": "string",
+							"description": "Input position"
+						},
+						"allowEditTags": {
+							"type": "boolean",
+							"description": "Clear input on choose"
+						}
+					}
+				}
+			]
+		},
+		"mw.widgets.CategoryMultiselectWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"limit": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Maximum number of results to load"
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.MenuTagMultiselectWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.MenuTagMultiselectWidget OO.ui.MenuTagMultiselectWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"clearInputOnChoose": {
+							"type": "boolean",
+							"description": "Clear the text input value when a menu option is chosen"
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.ComboBoxInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.ComboBoxInputWidget OO.ui.ComboBoxInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				}
+			]
+		},
+		"OO.ui.MultilineTextInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.MultilineTextInputWidget OO.ui.MultilineTextInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"autosize": {
+							"type": "boolean",
+							"description": "Automatically resize the text input to fit its content"
+						},
+						"maxRows": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Maximum number of rows to display when autosize is set to true"
+						},
+						"rows": {
+							"type": "integer",
+							"minimum": 1,
+							"description": "Number of visible lines in textarea. If used with autosize, specifies minimum number of rows to display."
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.MultiselectWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.ButtonSelectWidget OO.ui.ButtonSelectWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				}
+			]
+		},
+		"OO.ui.ButtonSelectWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.ButtonSelectWidget OO.ui.ButtonSelectWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"multiselect": {
+					"type": "boolean",
+					"description": "Allow for multiple selections"
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				}
+			}
+		},
+		"OO.ui.CheckboxInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.CheckboxInputWidget OO.ui.CheckboxInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"indeterminate": {
+							"type": "boolean",
+							"description": "Whether the checkbox is in the indeterminate state"
+						}
+					}
+				}
+			]
+		},
+		"OO.ui.CheckboxMultiselectInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.CheckboxMultiselectInputWidget OO.ui.CheckboxMultiselectInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				}
+			}
+		},
+		"OO.ui.DropdownInputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.DropdownInputWidget OO.ui.DropdownInputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				}
+			}
+		},
+		"OO.ui.InputWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.InputWidget OO.ui.InputWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				},
+				"dir": {
+					"type": "string",
+					"description": "The directionality of the input (ltr/rtl).",
+					"enum": ["ltr", "rtl"]
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute used in the rendered tag."
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function. Input filters modify the value of an input before it is accepted"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute."
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute."
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text."
+				}
+			}
+		},
+		"mw.widgets.datetime.DateTimeInputWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/OO.ui.InputWidget"
+				},
+				{
+					"x-default-properties": [],
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "Whether to act like a 'date'"
+						},
+						"required": {
+							"type": "boolean",
+							"description": "Whether a value is required"
+						},
+						"clearable": {
+							"type": "boolean",
+							"description": "Whether to provide for blanking the value."
+						},
+						"min": {
+							"type": "string",
+							"description": "Minimum allowed date"
+						},
+						"max": {
+							"type": "string",
+							"description": "Maximum allowed date"
+						}
+					}
+				}
+			]
+		},
+		"intl-tel-input": {
+			"x-message": {
+				"label": "Reference: [https://github.com/jackocnr/intl-tel-input intl-tel-input]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"allowDropdown": {
+					"type": "boolean",
+					"description": "Whether or not to allow the dropdown"
+				},
+				"autoInsertDialCode": {
+					"type": "boolean",
+					"description": "When enabled (requires nationalMode to be disabled), the international dial code will be automatically inserted into the input"
+				},
+				"autoPlaceholder": {
+					"type": "string",
+					"description": "Set the input's placeholder to an example number for the selected country, and update it if the country changes"
+				},
+				"customContainer": {
+					"type": "string",
+					"description": "Additional classes to add to the parent div."
+				},
+				"customPlaceholder": {
+					"type": "string",
+					"description": "Change the placeholder generated by autoPlaceholder. Must return a string"
+				},
+				"excludeCountries": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "In the dropdown, display all countries except the ones you specify here."
+				},
+				"formatOnDisplay": {
+					"type": "boolean",
+					"description": "Format the input value (according to the nationalMode option) during initialisation, and on setNumber. Requires the utilsScript option"
+				},
+				"geoIpLookup": {
+					"type": "boolean",
+					"description": "When setting initialCountry to 'auto', you must use this option to specify a custom function that looks up the user's location, and then calls the success callback with the relevant country code"
+				},
+				"hiddenInput": {
+					"type": "string",
+					"description": "Add a hidden input with the given name."
+				},
+				"initialCountry": {
+					"type": "string",
+					"description": "Set the initial country selection by specifying its country code"
+				},
+				"nationalMode": {
+					"type": "boolean",
+					"description": "Format numbers in the national format, rather than the international format."
+				},
+				"onlyCountries": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "In the dropdown, display only the countries you specify"
+				},
+				"placeholderNumberType": {
+					"type": "string",
+					"description": "Specify one of the keys from the global enum intlTelInputUtils.numberType"
+				},
+				"preferredCountries": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "Specify the countries to appear at the top of the list"
+				},
+				"separateDialCode": {
+					"type": "boolean",
+					"description": "Display the country dial code next to the selected flag"
+				},
+				"showFlags": {
+					"type": "boolean",
+					"description": "Set this to false to hide the flags e.g. for political reasons"
+				},
+				"utilsScript": {
+					"type": "string",
+					"description": "Enable formatting/validation etc. by specifying the URL of the included utils.js script (or alternatively just point it to the file on cdnjs.com)"
+				}
+			}
+		},
+		"LookupElement": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/textInputProperties"
+				}
+			]
+		},
+		"OO.ui.TagMultiselectWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.TagMultiselectWidget OO.ui.TagMultiselectWidget]",
+				"x-label-format": "wikitext"
+			},
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				}
+			]
+		},
+		"MenuTagSearchMultiselect": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/multiselectWidgetProperties"
+				}
+			]
+		},
+		"RatingWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"ratingLength": {
+							"type": "integer",
+							"description": "length (only for integer type)"
+						}
+					}
+				}
+			]
+		},
+		"button": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				}
+			]
+		},
+		"RangeWidget": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/commonProperties"
+				},
+				{
+					"type": "object",
+					"x-default-properties": [],
+					"properties": {
+						"step": {
+							"type": "number",
+							"description": "step"
+						},
+						"valueMask": {
+							"type": "string",
+							"default": "%v"
+						}
+					}
+				}
+			]
+		},
+		"VisualEditor": {
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"classes": {
+					"type": "string",
+					"description": "The names of the CSS classes to apply to the element."
+				}
+			}
+		},
+		"OO.ui.SelectFileWidget": {
+			"x-message": {
+				"label": "Reference: [https://doc.wikimedia.org/mediawiki-core/1.39.5/js/#!/api/OO.ui.SelectFileWidget OO.ui.SelectFileWidget]",
+				"x-label-format": "wikitext"
+			},
+			"type": "object",
+			"x-default-properties": [],
+			"properties": {
+				"accept": {
+					"type": "array",
+					"items": {
+						"x-input": "OO.ui.TagMultiselectWidget",
+						"type": "string"
+					},
+					"description": "MIME types to accept."
+				},
+				"accessKey": {
+					"type": "string",
+					"description": "The access key"
+				},
+				"dir": {
+					"type": "string",
+					"enum": ["ltr", "rtl"],
+					"description": "The directionality of the input (ltr/rtl)."
+				},
+				"disabled": {
+					"type": "boolean",
+					"description": "Disable the widget."
+				},
+				"droppable": {
+					"type": "boolean",
+					"description": "Whether to accept files by drag and drop"
+				},
+				"icon": {
+					"type": "string",
+					"description": "The symbolic name of the icon"
+				},
+				"id": {
+					"type": "string",
+					"description": "The HTML id attribute"
+				},
+				"inputFilter": {
+					"type": "string",
+					"description": "The name of an input filter function"
+				},
+				"inputId": {
+					"type": "string",
+					"description": "The value of the input's HTML id attribute"
+				},
+				"invisibleLabel": {
+					"type": "boolean",
+					"description": "Whether the label should be visually hidden"
+				},
+				"name": {
+					"type": "string",
+					"description": "The value of the input's HTML name attribute"
+				},
+				"notsupported": {
+					"type": "string",
+					"description": "Text to display when file support is missing"
+				},
+				"placeholder": {
+					"type": "string",
+					"description": "Placeholder text"
+				},
+				"showDropTarget": {
+					"type": "boolean",
+					"description": "Whether to show a drop target"
+				},
+				"text": {
+					"type": "string",
+					"description": "Text to insert"
+				},
+				"thumbnailSizeLimit": {
+					"type": "number",
+					"description": "File size limit in MiB"
+				},
+				"title": {
+					"type": "string",
+					"description": "The title text"
+				}
+			}
+		}
+	}
+}
+

@@ -1,0 +1,66 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/SimpleFormUI",
+	"@type": "JsonForms default schema",
+	"x-compact": true,
+	"x-css-class": "jsonforms-outerform",
+	"required": [],
+	"properties": {
+		"editor": {
+			"type": "string",
+			"x-format": "json",
+			"x-compact": true,
+			"x-input": "jsonforms",
+			"x-input-config": {
+				"schema": ""
+			}
+		},
+		"footer": {
+			"x-compact": true,
+			"x-css-class": "jsonforms-outerform-footer",
+			"properties": {
+				"summary": {
+					"type": "string"
+				},
+				"minor": {
+					"type": "boolean",
+					"title": "",
+					"description": "",
+					"description": "This is a [https://www.mediawiki.org/wiki/Help:Minor_edit minor edit]",
+					"x-description-format": "wikitext",
+					"x-input": "checkbox",
+					"x-control-config":  {
+						"align": "inline"
+					}
+				},
+				"buttons": {
+					"type": "object",
+					"x-layout": "horizontal",
+					"x-compact": true,
+					"x-css-class": "jsonforms-outerform-footer-buttons",
+					"properties": {
+						"submit": {
+							"type": "null",
+							"title": "Save changes",
+							"x-format": "button",
+							"x-button-action": "submitButton",
+							"x-input-config": {
+								"flags": ["primary", "progressive"]
+							}
+						},
+						"cancel": {
+							"type": "null",
+							"title": "Cancel",
+							"x-format": "button",
+							"x-button-action": "cancelButton",
+							"x-input-config": {
+								"flags": ["destructive"]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

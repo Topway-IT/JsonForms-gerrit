@@ -1,0 +1,114 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"jsonforms-extension-desc": "",
+	"jsonforms-loading-placeholder": "loading form",
+	"jsonformsdemo": "JsonFormsDemo",
+	"specialpages-group-jsonforms": "JsonForms",
+	"jsonformsmanage": "JsonForms Manage",
+	"jsonformsslotmanager": "Slot Manager",
+	"jsonforms-slotedit-label": "Edit slots",
+	"jsonforms-jsonedit-label": "Edit schema",
+	"jsonforms": "Forms",
+	"jsonformsedit": "Edit schema",
+	"jsonformscreate": "New article",
+
+	"action-jsonforms-caneditdata": "edit schemas",
+	"action-jsonforms-canmanageschemas": "manage schemas",
+	"action-jsonforms-canmanageforms": "manage forms",
+
+	"apihelp-jsonforms-fetch-schema-summary": "fetch schema",
+	"apihelp-jsonforms-process-schema-summary": "process schema",
+	"apihelp-jsonforms-submit-form-summary": "submit form",
+	"apihelp-jsonforms-groupnames-summary": "groupnames",
+	"apihelp-jsonforms-fetch-schema-param-schema": "schema",
+	"apihelp-jsonforms-process-schema-param-schema": "schema",
+	"apihelp-jsonforms-submit-form-param-data": "data",
+
+	"apihelp-jsonforms-fetch-schema-example-1": "fetch schema example",
+	"apihelp-jsonforms-process-schema-example-1": "process schema example",
+	"apihelp-jsonforms-submit-form-example-1": "submit form example",
+	"apihelp-jsonforms-groupnames-example-1": "groupnames example",
+
+	"jsonformsbrowseregular": "Regular",
+	"jsonformsbrowsecombined": "Combined",
+	"jsonformsbrowsedataonly": "Data only",
+
+	"right-jsonforms-caneditdata": "Edit data (JsonForms)",
+	"right-jsonforms-canmanageschemas": "Manage schemas (JsonForms)",
+	"right-jsonforms-canmanageforms": "Manage forms (JsonForms)",
+
+	"jsonforms-sidepanel-section": "JsonForms",
+	"jsonforms-forms": "Forms",
+	"jsonforms-new-article": "New article",
+	"jsonforms-sidepanel-managesforms": "Manage Forms",
+	"jsonforms-sidepanel-manageschemas": "Manage Schemas",
+	"jsonforms-sidepanel-slotmanager": "Slot Manager",
+
+	"group-jsonforms-admin": "JsonForms admin",
+	"group-jsonforms-editor": "JsonForms editor",
+
+	"jsonformsbrowse": "JsonForms",
+	"jsonformsbrowsedata": "Manage data",
+	"jsonformsbrowsequeries": "Manage queries",
+	"jsonformsbrowseforms": "Manage forms",
+	"jsonformsbrowseschemas": "Manage schemas",
+	"jsonformsbrowsedata-topnav": "'''navigation'''",
+
+	"jsonforms-jsonschema-namespace-schema-message": "Edit this schema using <a href=\"$1\">JsonForms's SchemaBuilder</a>",
+	"jsonforms-jsonschema-namespace-form-message": "Edit this schema using <a href=\"$1\">JsonForms's FormBuilder</a>",
+
+	"visualdata-slot-label-jsonforms-metadata": "metadata (JsonForms)",
+	"visualdata-slot-label-jsonforms-data": "data (JsonForms)",
+
+	"jsonforms-jsmodule-return-message-edit": "data edited in article <a target=\"_blank\" href=\"$2\">$1</a>",
+	"jsonforms-jsmodule-return-message-create": "data created in article <a target=\"_blank\" href=\"$2\">$1</a>",
+	"jsonforms-jsmodule-return-errors": "error editing form data: $1",
+
+	"jsonformsmanageforms": "Manage Forms",
+	"jsonformsmanageschemas": "Manage Schemas",
+
+	"jsonforms-special-edit-notitle": "title not set",
+	"jsonforms-special-edit-title-unknown": "unknown title",
+	"jsonforms-special-forms-returnlink": "← [[$1|All forms]]",
+
+	"jsonforms-special-edit-message": "Here you can assign/edit a schema associated to an article, provided that the article represents a class instance. (eg. city, person, article, etc.)",
+
+	"jsonforms-special-manage-returnlink": "'''← [[$1|Back]]'''",
+	"jsonforms-special-manage-schemas-schemaname": "'''Editing [[$1]]'''",
+	"jsonforms-special-manage-forms-alert": "A form is a wrapper for a schema ! To a create a new schema go [[Special:JsonFormsManage/Schemas|here]]",
+
+	"jsonforms-special-submit-captcha-error": "cannot verify captcha",
+	"jsonforms-special-submit-computed-target-title-error": "computed title error",
+	"jsonforms-special-submit-notitle": "article no title",
+	"jsonforms-special-submit-nocontent": "no content",
+	"jsonforms-special-submit-permission-error": "permission error",
+	"jsonforms-special-submit-article-exists": "article exists",
+	"jsonforms-special-submit-cannot-create-wikipage": "create wikipage error",
+	"jsonforms-special-submit-return-validate-url-error": "cannot validate return url",
+	"jsonforms-special-submit-return-no-return-url": "cannot determine return url",
+	"jsonforms-special-submit-move-error": "move error (from '$1' to $2')",
+
+	"jsonforms-parserfunction-error-no-form-name": "no form name",
+	"jsonforms-parserfunction-error-no-form": "no form",
+	"jsonforms-parserfunction-error-no-data": "no data",
+	"jsonforms-parserfunction-error-invalid-data": "invalid data",
+	"jsonforms-special-submit-processor-not-found": "cannot process form's data",
+
+	"jsonforms-special-browse-forms-description": "Here you can create/edit form descriptors and schemas. A form, in the context of JsonForms, is a wrapper for a schema containing parameters used to define the article editing or creation. A form can be used both as a parser function (in the format <code><nowiki>{{#jsonforms: <form name>}}</nowiki></code>) to display it anywhere on the wiki, or as a parameter of the special page [[Special:JsonForms]] (e.g. [[Special:JsonForms/NewContact|New contact]]).",
+	"jsonforms-manage-form-button-add-form": "New form",
+	"jsonforms-manage-form-button-add-schema": "New schema",
+	"jsonforms-special-browse-form-search-legend": "search",
+	"jsonforms-special-browse-form-search-schema-label": "",
+	"jsonforms-special-browse-form-search-submit": "submit",
+	"jsonforms-special-browse-pager-header-pagetitle": "page",
+	"jsonforms-special-browse-pager-header-actions": "actions",
+	"jsonforms-special-browse-table-empty": "no items",
+	"jsonforms-special-browse-error-invalid-form": "invalid form",
+	"jsonforms-special-browse-error-invalid-form-descriptor": "invalid form descriptor, ensure to run <pre>php extensions/JsonForms/maintenance/ImportData.php</pre> to import default forms and schemas",
+	"jsonforms-special-browse-error-invalid-schema-in-form-descriptor": "invalid schema in form descriptor",
+	"jsonforms-special-browse-error-invalid-article": "invalid article",
+
+	"jsonforms-special-browse-schemas-description": "Here you can create/edit [https://json-schema.org/specification json-schema]'s compliant schemas for the use inside form descriptors, manually or through the Schema builder. The Schema builder is created using this [[JsonSchema:SchemaBuilder/MetaSchema|meta-schema]] and AI agents can be prompted to create draft-schemas using it as a reference."
+}

@@ -1,0 +1,169 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/EditDataUI",
+	"@type": "JsonForms default schema",
+	"x-compact": true,
+	"x-css-class": "jsonforms-outerform",
+	"required": [],
+	"definitions": {
+		"newSchema": {
+			"type": "object",
+			"$id": "SelectSchema",
+			"x-watch": "schema",
+			"title": "Edit schema",
+			"properties": {
+				"schema": {
+					"type": "string",
+					"title": "JSON Schema",
+					"description": "",
+					"default": "",
+					"x-format": "text",
+					"x-input": "OO.ui.DropdownInputWidget",
+					"x-enum-provider": "jsonSchemas"
+				},
+				"preview": {
+					"x-compact": "true",
+					"x-css-class": "jsonforms-editdata-preview",
+					"x-watch": "schema",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "JsonSchema:{{schema}}",
+							"x-destroy-values-on-switch": true
+						}
+					]
+				}
+			}
+		}
+	},
+	"properties": {
+		"form": {
+			"x-layout": "tabs",
+			"x-compact": true,
+			"properties": {
+				"schema": {
+					"type": "object",
+					"x-compact": true,
+					"additionalProperties": {
+						"type": "object",
+						"x-compact": true,
+						"properties": {
+							"schemaName": {
+								"type": "string",
+								"x-format": "hidden"
+							},
+							"editor": {
+								"x-message": {
+									"x-label-template": "Using schema <a href=\"{{replace wgArticlePath '$1' 'JsonSchema:'}}{{schemaName}}\">JsonSchema:{{schemaName}}</a>"
+								},
+								"x-watch": "schemaName",
+								"links": [
+									{
+										"rel": "describedBy",
+										"href": "JsonSchema:{{schemaName}}"
+									}
+								]
+							}
+						}
+					},
+					"maxProperties": 1,
+					"x-ui-schema": {
+						"label": "New schema",
+						"schema": "#/definitions/newSchema",
+						"name": "newSchema",
+						"popup_size": "large"
+					}
+				},
+				"options": {
+					"x-compact": true,
+					"properties": {
+						"show_infobox": {
+							"type": "boolean",
+							"title": "Show Infobox",
+							"description": "Whether to show an infobox on the target page",
+							"default": true
+						},
+						"infobox_position": {
+							"type": "string",
+							"title": "Infobox position",
+							"enum": [
+								"right",
+								"left",
+								"top",
+								"bottom"
+							],
+							"default": "right",
+							"x-dependency": {
+								"path": "show_infobox",
+								"op": "==",
+								"value": true
+							}
+						},
+						"infobox_template": {
+							"type": "string",
+							"title": "Infobox template",
+							"description": "Template to use (leave empty for automatic generation)",
+							"default": "",
+							"x-input": "mw.widgets.TitleInputWidget",
+							"x-input-config": {
+								"namespace": 10
+							},
+							"x-dependency": {
+								"path": "show_infobox",
+								"op": "==",
+								"value": true
+							}
+						}
+					}
+				}
+			}
+		},
+		"footer": {
+			"x-compact": true,
+			"x-css-class": "jsonforms-outerform-footer",
+			"properties": {
+				"summary": {
+					"type": "string"
+				},
+				"minor": {
+					"type": "boolean",
+					"title": "",
+					"description": "",
+					"description": "This is a [https://www.mediawiki.org/wiki/Help:Minor_edit minor edit]",
+					"x-description-format": "wikitext",
+					"x-input": "checkbox",
+					"x-control-config": {
+						"align": "inline"
+					}
+				},
+				"buttons": {
+					"type": "object",
+					"x-layout": "horizontal",
+					"x-compact": true,
+					"x-css-class": "jsonforms-outerform-footer-buttons",
+					"properties": {
+						"submit": {
+							"type": "null",
+							"title": "Save changes",
+							"x-format": "button",
+							"x-button-action": "submitButton",
+							"x-input-config": {
+								"flags": ["primary", "progressive"]
+							}
+						},
+						"cancel": {
+							"type": "null",
+							"title": "Cancel",
+							"x-format": "button",
+							"x-button-action": "cancelButton",
+							"x-input-config": {
+								"flags": ["destructive"]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

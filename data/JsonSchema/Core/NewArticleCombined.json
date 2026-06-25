@@ -1,0 +1,230 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/NewArticleCombined",
+	"@type": "JsonForms default schema",
+	"x-compact": true,
+	"x-css-class": "jsonforms-outerform",
+	"required": [],
+	"definitions": {
+		"editor_wikieditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "wikieditor"
+		},
+		"editor_visualeditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "visualeditor"
+		},
+		"editor_jsoneditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsoneditor"
+		},
+		"editor_source": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input-config": {
+				"autosize": true,
+				"rows": 6
+			}
+		},
+		"article": {
+			"properties": {
+				"title": {
+					"type": "string",
+					"minLength": 1,
+					"x-input": "mw.widgets.TitleInputWidget"
+				},
+				"content_model": {
+					"type": "string",
+					"title": "Content model",
+					"default": "wikitext",
+					"x-watch": "role",
+					"x-enum-provider": "contentModelByRole"
+				},
+				"editor": {
+					"type": "string",
+					"title": "Editor",
+					"default": "source",
+					"x-watch": "content_model",
+					"x-enum-provider": "editorByContentModel"
+				},
+				"content": {
+					"type": "string",
+					"x-watch": "editor",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "#/definitions/editor_{{editor}}"
+						}
+					]
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"x-input": "categorymultiselect"
+					}
+				}
+			},
+			"required": ["title"]
+		},
+		"newSchema": {
+			"type": "object",
+			"$id": "SelectSchema",
+			"x-watch": "schema",
+			"title": "Edit schema",
+			"properties": {
+				"schema": {
+					"type": "string",
+					"title": "JSON Schema",
+					"description": "Manage schemas [[Special:JsonFormsManage/Schemas|here]]",
+					"x-description-format": "wikitext",
+					"default": "",
+					"x-format": "text",
+					"x-input": "OO.ui.DropdownInputWidget",
+					"x-enum-provider": "jsonSchemas"
+				},
+				"preview": {
+					"x-css-class": "jsonforms-editdata-preview",
+					"x-compact": "true",
+					"x-watch": "schema",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "JsonSchema:{{schema}}",
+							"x-destroy-values-on-switch": true
+						}
+					]
+				}
+			}
+		}
+	},
+	"properties": {
+		"form": {
+			"x-compact": true,
+			"title": "combined",
+			"description": "Main slot + one slot for data",
+			"x-layout": "tabs",
+			"properties": {
+				"main": {
+					"x-compact": true,
+					"$ref": "#/definitions/article"
+				},
+				"schema": {
+					"type": "object",
+					"x-compact": true,
+					"properties": {
+						"schemaName": {
+							"type": "string",
+							"title": "JSON Schema",
+							"description": "",
+							"default": "",
+							"minLength": 1,
+							"description": "any schema listed {{#querylink: Special:PrefixIndex|here|namespace=2100}}",
+							"x-description-format": "wikitext",
+							"x-enum-provider": "jsonSchemas"
+						},
+						"editor": {
+							"x-dependency": {
+								"path": "schemaName",
+								"op": "!=",
+								"value": ""
+							},
+							"x-watch": "schemaName",
+							"x-message": {
+								"x-label-template": "Using schema <a href=\"{{replace wgArticlePath '$1' 'JsonSchema:'}}{{schemaName}}\">JsonSchema:{{schemaName}}</a>"
+							},
+							"links": [
+								{
+									"rel": "describedBy",
+									"href": "JsonSchema:{{schemaName}}",
+									"x-destroy-values-on-switch": true
+								}
+							]
+						}
+					}
+				},
+				"options": {
+					"x-compact": true,
+					"properties": {
+						"show_infobox": {
+							"type": "boolean",
+							"title": "Show Infobox",
+							"description": "Whether to show an infobox on the target page",
+							"default": true
+						},
+						"infobox_position": {
+							"type": "string",
+							"title": "Infobox position",
+							"enum": ["right", "left", "top", "bottom"],
+							"default": "right",
+							"x-dependency": {
+								"path": "show_infobox",
+								"op": "==",
+								"value": true
+							}
+						},
+						"infobox_template": {
+							"type": "string",
+							"title": "Infobox template",
+							"description": "Template to use (leave empty for automatic generation)",
+							"default": "",
+							"x-input": "mw.widgets.TitleInputWidget",
+							"x-input-config": {
+								"namespace": 10
+							},
+							"x-dependency": {
+								"path": "show_infobox",
+								"op": "==",
+								"value": true
+							}
+						}
+					}
+				}
+			}
+		},
+		"footer": {
+			"x-compact": true,
+			"x-css-class": "jsonforms-outerform-footer",
+			"properties": {
+				"summary": {
+					"type": "string"
+				},
+				"minor": {
+					"type": "boolean",
+					"title": "",
+					"description": "This is a [https://www.mediawiki.org/wiki/Help:Minor_edit minor edit]",
+					"x-description-format": "wikitext",
+					"x-input": "checkbox",
+					"x-control-config": {
+						"align": "inline"
+					}
+				},
+				"buttons": {
+					"type": "object",
+					"x-layout": "horizontal",
+					"x-compact": true,
+					"x-css-class": "jsonforms-outerform-footer-buttons",
+					"properties": {
+						"submit": {
+							"type": "null",
+							"title": "Save changes",
+							"x-format": "button",
+							"x-button-action": "submitButton",
+							"x-input-config": {
+								"flags": ["primary", "progressive"]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

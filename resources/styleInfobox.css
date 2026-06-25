@@ -1,0 +1,243 @@
+/**
+ * InfoboxRender - CSS Grid layout (no tables)
+ */
+
+.jsonforms-infobox .mw-collapsible-toggle {
+	padding: 0.5em 0.8em;
+}
+
+.jsonforms-infobox .infobox-object-header.infobox-root {
+	display: table;
+	/* border-collapse: collapse; */
+	width: 100%;
+	background: #E3EBFF;;
+}
+
+.jsonforms-infobox .infobox-array-header.infobox-root {
+	display: table;
+	width: 100%;
+}
+
+.jsonforms-infobox .infobox-header-left {
+	display: table-cell;
+}
+
+.jsonforms-infobox .infobox-header-right {
+	display: table-cell;
+}
+
+.jsonforms-infobox-right {
+	float: right;
+	width: 320px;
+}
+
+.jsonforms-infobox-left {
+	float: left;
+	width: 320px;
+}
+
+
+/* Array container */
+.jsonforms-infobox .infobox-array {
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    margin: 0.5em 0;
+    overflow: hidden;
+}
+
+.jsonforms-infobox .infobox-array-header {
+    font-weight: bold;
+    padding: 0.5em 0.8em;
+}
+
+.jsonforms-infobox .infobox-array-content {
+    padding: 0.5em;
+    background-color: #ffffff;
+    list-style-type: none;
+    list-style-image: none;
+}
+
+.jsonforms-infobox .infobox-object {
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    margin: 0.5em 0;
+    overflow: hidden;
+}
+
+.jsonforms-infobox .infobox-object-header {
+    font-weight: bold;
+    padding: 0.5em 0.8em;
+}
+
+.jsonforms-infobox .infobox-object-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+/* Row using CSS Grid */
+.jsonforms-infobox .infobox-row {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.jsonforms-infobox .infobox-row:last-child {
+    border-bottom: none;
+}
+
+.jsonforms-infobox .infobox-label {
+    padding: 0.5em 0.8em;
+    font-weight: normal;
+}
+
+.jsonforms-infobox .infobox-key-label {
+    color: #202122;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: bold;
+    gap: 0.3em;
+}
+
+.jsonforms-infobox .infobox-type-badge {
+    background-color: #eaecf0;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: normal;
+    padding: 0.15em 0.5em;
+    white-space: nowrap;
+}
+
+.jsonforms-infobox .infobox-value {
+    padding: 0.5em 0.8em;
+    word-break: break-word;
+}
+
+.jsonforms-infobox .value-boolean,
+.jsonforms-infobox .value-null,
+.jsonforms-infobox .value-number,
+.jsonforms-infobox .value-html,
+.jsonforms-infobox .value-textarea,
+.jsonforms-infobox .value-empty,
+.jsonforms-infobox .value-string,
+.jsonforms-infobox .value-object,
+.jsonforms-infobox .value-default,
+.jsonforms-infobox .value-file,
+.jsonforms-infobox .value-file-thumbnail,
+.jsonforms-infobox .value-user,
+.jsonforms-infobox .value-category,
+.jsonforms-infobox .value-page {
+	display: inline;
+
+}
+
+.jsonforms-infobox .infobox-meta {
+    color: #54595d;
+    font-weight: normal;
+    margin-left: 0.5em;
+}
+
+.jsonforms-infobox .infobox-type {
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0.1em 0.4em;
+}
+
+.jsonforms-infobox .infobox-count {
+}
+
+.jsonforms-infobox .infobox-key {
+    color: #202122;
+    font-weight: bold;
+}
+
+/* Hints and indicators */
+.jsonforms-infobox .infobox-layout-hint,
+.jsonforms-infobox .infobox-unique-hint,
+.jsonforms-infobox .infobox-format-hint {
+    font-size: 0.8em;
+    margin-right: 8px;
+}
+
+.jsonforms-infobox .infobox-required {
+    color: #d33;
+    font-weight: bold;
+    margin-left: 0.2em;
+}
+
+/* Value type styles */
+.jsonforms-infobox .value-boolean {
+    border-radius: 3px;
+    display: inline-block;
+    font-family: monospace;
+    padding: 0.15em 0.5em;
+}
+
+.jsonforms-infobox .value-null {
+    color: #72777d;
+    font-style: italic;
+}
+
+.jsonforms-infobox .value-number {
+    color: #0a5;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.jsonforms-infobox .value-string {
+    color: #202122;
+    word-break: break-word;
+}
+
+.jsonforms-infobox .value-textarea {
+    white-space: pre-wrap;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+.jsonforms-infobox .value-html {
+    border-left: 3px solid #a2a9b1;
+    padding: 0.2em 0.5em;
+}
+
+.jsonforms-infobox .value-empty {
+    color: #999;
+    font-style: italic;
+}
+
+/* Nested containers */
+.jsonforms-infobox .infobox-array .infobox-array,
+.jsonforms-infobox .infobox-array .infobox-object,
+.jsonforms-infobox .infobox-object .infobox-array,
+.jsonforms-infobox .infobox-object .infobox-object {
+    margin: 0.5em;
+}
+
+.jsonforms-infobox .infobox-row:hover {
+}
+
+.jsonforms-infobox .infobox-row:hover .infobox-label {
+}
+
+@media print {
+    .jsonforms-infobox .infobox-array,
+   .jsonforms-infobox .infobox-object {
+        break-inside: avoid;
+        border: 1px solid #aaa;
+    }
+    
+    .jsonforms-infobox .infobox-row {
+        break-inside: avoid;
+    }
+}
+
+@media (max-width: 600px) {
+    .jsonforms-infobox .infobox-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .jsonforms-infobox .infobox-label {
+        border-bottom: 1px solid #eaecf0;
+    }
+}

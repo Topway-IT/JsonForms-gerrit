@@ -1,0 +1,123 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/NewArticleRegular",
+	"@type": "JsonForms default schema",
+	"x-compact": true,
+	"x-css-class": "jsonforms-outerform",
+	"required": [],
+	"definitions": {
+		"editor_wikieditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"minLength": 1,
+			"x-input": "wikieditor"
+		},
+		"editor_visualeditor": {
+			"type": "string",
+			"x-compact": true,
+			"minLength": 1,
+			"x-format": "textarea",
+			"x-input": "visualeditor"
+		},
+		"editor_jsoneditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsoneditor"
+		},
+		"editor_source": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"minLength": 1,
+			"x-input-config": {
+				"autosize": true,
+				"rows": 6
+			}
+		}
+	},
+	"properties": {
+		"form": {
+			"title": "",
+			"description": "Regular wiki article (only main slot)",
+			"properties": {
+				"title": {
+					"type": "string",
+					"minLength": 1,
+					"x-input": "mw.widgets.TitleInputWidget"
+				},
+				"content_model": {
+					"type": "string",
+					"title": "Content model",
+					"default": "wikitext",
+					"x-watch": "role",
+					"x-enum-provider": "contentModelByRole"
+				},
+				"editor": {
+					"type": "string",
+					"title": "Editor",
+					"default": "source",
+					"x-watch": "content_model",
+					"x-enum-provider": "editorByContentModel"
+				},
+				"content": {
+					"type": "string",
+					"x-watch": "editor",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "#/definitions/editor_{{editor}}"
+						}
+					]
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"x-input": "categorymultiselect"
+					}
+				}
+			},
+			"required": [ "title", "content" ]
+		},
+		"footer": {
+			"x-compact": true,
+			"x-css-class": "jsonforms-outerform-footer",
+			"properties": {
+				"summary": {
+					"type": "string"
+				},
+				"minor": {
+					"type": "boolean",
+					"title": "",
+					"description": "",
+					"description": "This is a [https://www.mediawiki.org/wiki/Help:Minor_edit minor edit]",
+					"x-description-format": "wikitext",
+					"x-input": "checkbox",
+					"x-control-config": {
+						"align": "inline"
+					}
+				},
+				"buttons": {
+					"type": "object",
+					"x-layout": "horizontal",
+					"x-compact": true,
+					"x-css-class": "jsonforms-outerform-footer-buttons",
+					"properties": {
+						"submit": {
+							"type": "null",
+							"title": "Save changes",
+							"x-format": "button",
+							"x-button-action": "submitButton",
+							"x-input-config": {
+								"flags": ["primary", "progressive"]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

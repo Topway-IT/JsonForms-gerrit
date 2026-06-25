@@ -1,0 +1,20 @@
+{
+	"$id": "NewContact",
+	"name": "New contact",
+	"schema": "Contact",
+	"action": "create",
+	"ugroups": [
+		"user"
+	],
+	"pagename_formula": "Contacts/<fullname>",
+	"overwrite_existing_article_on_create": false,
+	"slot": "jsonforms-data",
+	"freetext": false,
+	"edit_categories": true,
+	"default_categories": [
+		"Contact"
+	],
+	"show_infobox": true,
+	"view": "inline"
+}
+

@@ -1,0 +1,206 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SurveyBuilder",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"title": "Nested Matrix Builder",
+	"description": "Each item can have multiple rows and columns and nested child items.",
+	"type": "object",
+	"x-layout": "paged",
+	"definitions": {
+		"cell": {
+			"title": "Data Cell",
+			"description": "Configuration for data cells",
+			"type": "object",
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": [
+						"number",
+						"string",
+						"boolean"
+					],
+					"default": "number"
+				},
+				"input": {
+					"type": "string"
+				},
+				"x-input-config": {
+					"type": "object",
+					"compact": true,
+					"x-collapsible": true,
+					"description": "Configuration options passed to the selected input widget",
+					"x-watch": "input",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "JsonSchema:MetaSchema/InputOptions#/definitions/{{input}}"
+						}
+					]
+				}
+			},
+			"allOf": [
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "number"
+							}
+						},
+						"required": [
+							"type"
+						]
+					},
+					"then": {
+						"properties": {
+							"input": {
+								"enum": [
+									"OO.ui.NumberInputWidget",
+									"RangeWidget"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "string"
+							}
+						},
+						"required": [
+							"type"
+						]
+					},
+					"then": {
+						"properties": {
+							"input": {
+								"enum": [
+									"OO.ui.TextInputWidget"
+								]
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "boolean"
+							}
+						},
+						"required": [
+							"type"
+						]
+					},
+					"then": {
+						"properties": {
+							"input": {
+								"enum": [
+									"OO.ui.CheckboxInputWidget",
+									"OO.ui.ToggleSwitchWidget"
+								]
+							}
+						}
+					}
+				}
+			]
+		},
+		"row": {
+			"title": "Row Definition",
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"title": "Row Name"
+				},
+				"title": {
+					"type": "string",
+					"title": "Row Title",
+					"description": "Display title for the row"
+				}
+			},
+			"required": [
+				"name",
+				"title"
+			]
+		},
+		"column": {
+			"title": "Column Definition",
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"title": "Column Name"
+				},
+				"title": {
+					"type": "string",
+					"title": "Column Title",
+					"description": "Display title for the column"
+				}
+			},
+			"required": [
+				"name",
+				"title"
+			]
+		},
+		"item": {
+			"title": "Item",
+			"type": "object",
+			"properties": {
+				"title": {
+					"type": "string",
+					"title": "Item Title",
+					"description": "Display title for this matrix section"
+				},
+				"rows": {
+					"title": "Rows",
+					"description": "Array of row definitions for this item",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/row",
+						"type": "object"
+					},
+					"minItems": 1
+				},
+				"columns": {
+					"title": "Columns",
+					"description": "Array of column definitions for this item",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/column",
+						"type": "object"
+					},
+					"minItems": 1
+				},
+				"items": {
+					"title": "Child Items",
+					"description": "Nested child items",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/item",
+						"type": "object"
+					}
+				}
+			},
+			"required": [
+				"rows",
+				"columns"
+			]
+		}
+	},
+	"properties": {
+		"items": {
+			"$ref": "#/definitions/item",
+			"type": "object"
+		},
+		"cell": {
+			"$ref": "#/definitions/cell",
+			"type": "object"
+		}
+	},
+	"required": [
+		"items",
+		"cell"
+	]
+}
+
