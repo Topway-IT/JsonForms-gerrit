@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+	"x-default-properties": [],
+  "properties": {
+    "buttonList": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "undo", "redo", "bold", "italic", "underline", "strike",
+                "blockStyle", "font", "fontSize", "fontColor", "backgroundColor",
+                "removeFormat", "outdent", "indent", "align", "list",
+                "table", "link", "image", "video", "fullScreen", "codeView",
+                "subscript", "superscript", "preview", "print", "save",
+                "template", "layout", "lineHeight", "paragraphStyle", "textStyle",
+                "blockquote", "hr", "showBlocks", "markdownView", "dir_ltr", "dir_rtl",
+                "copy", "cut", "paste", "selectAll", "newDocument", "pageBreak",
+                "pageUp", "pageDown", "pageNavigator", "finder",
+                ":Format-default.more_paragraph",
+                ":Text-default.more_text",
+                ":Insert-default.more_plus"
+              ]
+            }
+          },
+          {
+            "type": "string",
+            "enum": ["|", "/", "-right"]
+          },
+          {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^%[0-9]{3,4}$"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "string",
+                        "enum": ["|", "/"]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        ]
+      }
+    }
+  },
+  "required": []
+}

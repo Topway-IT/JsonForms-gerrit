@@ -1,0 +1,120 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Bookstore",
+	"type": "object",
+	"title": "Bookstore",
+	"definitions": {
+		"newPropertySchema": {
+			"title": "New property",
+			"type": "object",
+			"required": [
+				"name",
+				"type",
+				"multiple"
+			],
+			"properties": {
+				"name": {
+					"title": "Property name",
+					"type": "string",
+					"pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+					"description": "Valid identifier"
+				},
+				"type": {
+					"title": "type",
+					"type": "string",
+					"description": "Select the type of property",
+					"enum": [
+						"text",
+						"number",
+						"integer",
+						"date",
+						"datetime-local",
+						"time",
+						"boolean",
+						"textarea",
+						"email",
+						"color",
+						"range",
+						"tel",
+						"url",
+						"json"
+					],
+					"x-input": "OO.ui.RadioSelectInputWidget",
+					"x-enum-titles": [
+						"Text",
+						"Number",
+						"Integer",
+						"Date",
+						"Datetime-local",
+						"Time",
+						"Boolean",
+						"Textarea",
+						"Email",
+						"Color",
+						"Range",
+						"Tel",
+						"Url",
+						"Json"
+					]
+				},
+				"multiple": {
+					"title": "multiple",
+					"type": "boolean",
+					"description": "allows multiple values"
+				}
+			}
+		}
+	},
+	"properties": {
+		"Book": {
+			"title": "books",
+			"type": "array",
+			"x-layout": "tabs",
+			"items": {
+				"type": "object",
+				"title": "book",
+				"additionalProperties": true,
+				"x-additional-properties-ui": {
+					"schema": {
+						"$ref": "#/definitions/newPropertySchema"
+					},
+					"name": "NewProperty",
+					"label": "New property"
+				},
+				"properties": {
+					"Title": {
+						"type": "string"
+					},
+					"Author": {
+						"type": "array",
+						"title": "",
+						"x-layout": "booklet",
+						"x-collapsible": true,
+						"items": {
+							"type": "object",
+							"title": "author",
+							"properties": {
+								"FirstName": {
+									"type": "string"
+								},
+								"Surname": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"Price": {
+						"type": "number"
+					},
+					"ISBN": {
+						"type": "string"
+					},
+					"Genre": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
+

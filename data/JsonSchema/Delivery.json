@@ -1,0 +1,53 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Delivery",
+	"type": "object",
+	"properties": {
+		"has_delivery": {
+			"title": "Delivery Required ?",
+			"type": "boolean",
+			"default": false
+		},
+		"delivery_method": {
+			"title": "Delivery Method",
+			"type": "string"
+		}
+	},
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"has_delivery": {
+						"const": true
+					}
+				},
+				"required": [
+					"has_delivery"
+				]
+			},
+			"then": {
+				"properties": {
+					"delivery_method": {
+						"enum": [
+							"standard",
+							"express",
+							"overnight"
+						],
+						"default": "standard"
+					}
+				}
+			},
+			"else": {
+				"properties": {
+					"delivery_method": {
+						"enum": [
+							"pickup",
+							"digital"
+						],
+						"default": "pickup"
+					}
+				}
+			}
+		}
+	]
+}
+

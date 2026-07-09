@@ -1,0 +1,33 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/SelectSchema",
+	"x-watch" : "schema",
+	"title": "Edit schema",
+	"x-collapsible": true,
+	"properties": {
+		"schema": {
+			"type": "string",
+			"title": "JSON Schema",
+			"description": "",
+			"default": "",
+			"minLength": 1,
+			"description": "any schema listed {{#querylink: Special:PrefixIndex|here|namespace=2100}}",
+			"x-description-format": "wikitext",
+			"x-format": "autocomplete",
+			"x-input": "LookupElement",
+			"x-autocomplete-provider": "jsonSchemas"
+		},
+		"editor": {
+			"x-compact": "true",
+			"x-watch" : "schema",
+			"links": [
+				{
+					"rel": "describedBy",
+					"href": "JsonSchema:{{schema}}",
+					"x-destroy-values-on-switch": true
+				}
+			]
+		}
+	}
+}
+

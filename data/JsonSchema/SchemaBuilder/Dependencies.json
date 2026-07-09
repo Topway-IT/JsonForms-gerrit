@@ -1,0 +1,260 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SchemaBuilder/Dependencies",
+	"title": "DependencyCondition",
+	"oneOf": [
+		{
+			"title": "Simple Value",
+			"type": "object",
+			"additionalProperties": {
+				"type": [
+					"string",
+					"number",
+					"boolean",
+					"null"
+				]
+			},
+			"minProperties": 1,
+			"maxProperties": 1
+		},
+		{
+			"title": "Atomic Condition",
+			"$ref": "#/definitions/atomicCondition"
+		},
+		{
+			"title": "AND Condition",
+			"$ref": "#/definitions/andCondition"
+		},
+		{
+			"title": "OR Condition",
+			"$ref": "#/definitions/orCondition"
+		},
+		{
+			"title": "NOT Condition",
+			"$ref": "#/definitions/notCondition"
+		}
+	],
+	"definitions": {
+		"operator": {
+			"type": "string",
+			"enum": [
+				"==",
+				"!=",
+				"\u003E",
+				"\u003C",
+				"\u003E=",
+				"\u003C="
+			]
+		},
+		"atomicCondition": {
+			"title": "Atomic Condition",
+			"type": "object",
+			"x-input": "OO.ui.DropdownInputWidget",
+			"oneOf": [
+				{
+					"title": "Compare Another Field to Constant",
+					"type": "object",
+					"properties": {
+						"path": {
+							"type": "string"
+						},
+						"op": {
+							"$ref": "#/definitions/operator"
+						},
+						"value": {
+							"type": [
+								"string",
+								"number",
+								"boolean",
+								"null"
+							]
+						}
+					},
+					"required": [
+						"path",
+						"op",
+						"value"
+					]
+				},
+				{
+					"title": "Exists Check",
+					"type": "object",
+					"properties": {
+						"op": {
+							"type": "string",
+							"const": "exists"
+						},
+						"path": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"op",
+						"path"
+					]
+				},
+				{
+					"title": "Compare Current Field to Another Field",
+					"type": "object",
+					"properties": {
+						"path": {
+							"type": "string"
+						},
+						"op": {
+							"type": "string",
+							"enum": [
+								"==",
+								"!=",
+								"\u003E",
+								"\u003C",
+								"\u003E=",
+								"\u003C="
+							]
+						}
+					},
+					"required": [
+						"path",
+						"op"
+					]
+				},
+				{
+					"title": "Compare Current Field to Constant",
+					"type": "object",
+					"properties": {
+						"op": {
+							"$ref": "#/definitions/operator"
+						},
+						"value": {
+							"type": [
+								"string",
+								"number",
+								"boolean",
+								"null"
+							]
+						}
+					},
+					"required": [
+						"op",
+						"value"
+					]
+				},
+				{
+					"title": "Matches Regex",
+					"type": "object",
+					"properties": {
+						"op": {
+							"type": "string",
+							"const": "matches"
+						},
+						"value": {
+							"type": "string"
+						},
+						"path": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"op",
+						"value"
+					]
+				}
+			]
+		},
+		"andCondition": {
+			"title": "AND Condition",
+			"type": "object",
+			"properties": {
+				"and": {
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{
+								"title": "Atomic Condition",
+								"$ref": "#/definitions/atomicCondition"
+							},
+							{
+								"title": "Nested AND",
+								"$ref": "#/definitions/andCondition"
+							},
+							{
+								"title": "Nested OR",
+								"$ref": "#/definitions/orCondition"
+							},
+							{
+								"title": "Nested NOT",
+								"$ref": "#/definitions/notCondition"
+							}
+						]
+					},
+					"minItems": 1
+				}
+			},
+			"required": [
+				"and"
+			]
+		},
+		"orCondition": {
+			"title": "OR Condition",
+			"type": "object",
+			"properties": {
+				"or": {
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{
+								"title": "Atomic Condition",
+								"$ref": "#/definitions/atomicCondition"
+							},
+							{
+								"title": "Nested AND",
+								"$ref": "#/definitions/andCondition"
+							},
+							{
+								"title": "Nested OR",
+								"$ref": "#/definitions/orCondition"
+							},
+							{
+								"title": "Nested NOT",
+								"$ref": "#/definitions/notCondition"
+							}
+						]
+					},
+					"minItems": 1
+				}
+			},
+			"required": [
+				"or"
+			]
+		},
+		"notCondition": {
+			"title": "NOT Condition",
+			"type": "object",
+			"properties": {
+				"not": {
+					"oneOf": [
+						{
+							"title": "Atomic Condition",
+							"$ref": "#/definitions/atomicCondition"
+						},
+						{
+							"title": "Nested AND",
+							"$ref": "#/definitions/andCondition"
+						},
+						{
+							"title": "Nested OR",
+							"$ref": "#/definitions/orCondition"
+						},
+						{
+							"title": "Nested NOT",
+							"$ref": "#/definitions/notCondition"
+						}
+					]
+				}
+			},
+			"required": [
+				"not"
+			]
+		}
+	}
+}
+

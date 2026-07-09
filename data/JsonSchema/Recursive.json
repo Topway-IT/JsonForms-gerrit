@@ -1,0 +1,70 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Recursive",
+	"$ref": "#/definitions/person",
+	"type": "object",
+	"title": "Person",
+	"x-layout": "paged",
+	"definitions": {
+		"person": {
+			"type": "object",
+			"id": "person",
+			"x-default-properties": [
+				"fname",
+				"lname",
+				"coworkers"
+			],
+			"patternProperties": {
+				"^cousin_[0-9]+$": {
+					"title": "Cousin",
+					"$ref": "#/definitions/person",
+					"type": "object"
+				}
+			},
+			"properties": {
+				"fname": {
+					"title": "first name",
+					"type": "string"
+				},
+				"lname": {
+					"title": "last name",
+					"type": "string"
+				},
+				"bestFriend": {
+					"title": "best friend",
+					"x-input": "OO.ui.ButtonSelectWidget",
+					"oneOf": [
+						{
+							"title": "none",
+							"type": "null"
+						},
+						{
+							"title": "person",
+							"$ref": "#/definitions/person",
+							"type": "object"
+						}
+					]
+				},
+				"coworkers": {
+					"type": "array",
+					"items": {
+						"title": "Coworker",
+						"$ref": "#/definitions/person",
+						"type": "object"
+					}
+				},
+				"mother": {
+					"title": "mother",
+					"$ref": "#/definitions/person",
+					"type": "object"
+				}
+			}
+		},
+		"year": {
+			"type": "integer",
+			"pattern": "^[0-9]{4}$",
+			"minimum": 1900,
+			"maximum": 2100
+		}
+	}
+}
+

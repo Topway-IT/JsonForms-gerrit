@@ -1,0 +1,175 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/SlotManager",
+	"type": "object",
+	"x-layout": "tabs",
+	"x-layout-config": {
+		"mainLabel": "main"
+	},
+	"x-default-properties": ["content_model", "editor", "content", "categories"],
+	"definitions": {
+		"editor_wikieditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "wikieditor"
+		},
+		"editor_codeeditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "codeeditor"
+		},
+		"editor_visualeditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "visualeditor"
+		},
+		"editor_jsoneditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsoneditor"
+		},
+		"editor_jsonforms": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsonforms",
+			"x-input-config": {
+				"schema": "JsonSchema:Core/SelectSchema"
+			}
+		},
+		"editor_source": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input-config": {
+				"autosize": true,
+				"rows": 6
+			}
+		},
+		"editor_suneditor": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsonforms",
+			"x-input-config": {
+				"schema": {
+					"type": "string",
+					"x-format": "html",
+					"x-input": "SunEditor"
+				}
+			}			
+		},
+		"editor_easymde": {
+			"type": "string",
+			"x-compact": true,
+			"x-format": "textarea",
+			"x-input": "jsonforms",
+			"x-input-config": {
+				"schema": {
+					"type": "string",
+					"x-format": "markdown",
+					"x-input": "EasyMDE"
+				}
+			}
+		},
+		"slotOptions": {
+			"type": "object",
+			"x-compact": true,
+			"required": ["content_model"],
+			"x-default-properties": ["content_model", "editor", "content"],
+			"properties": {
+				"role": {
+					"type": "string",
+					"x-format": "hidden_",
+					"default": "main"
+				},
+				"content_model": {
+					"type": "string",
+					"title": "Content model",
+					"default": "wikitext",
+					"x-watch": "role",
+					"x-enum-provider": "contentModelByRole"
+				},
+				"editor": {
+					"type": "string",
+					"title": "Editor",
+					"default": "source",
+					"x-watch": "content_model",
+					"x-enum-provider": "editorByContentModel"
+				},
+				"content": {
+					"type": "string",
+					"x-watch": "editor",
+					"links": [
+						{
+							"rel": "describedBy",
+							"href": "#/definitions/editor_{{editor}}"
+						}
+					]
+				}
+			}
+		},
+		"newSlot": {
+			"title": "New slot",
+			"type": "object",
+			"required": ["name"],
+			"properties": {
+				"name": {
+					"title": "slot name",
+					"type": "string",
+					"x-enum-provider": "slotRolesNoMain"
+				}
+			}
+		}
+	},
+	"allOf": [
+		{
+			"type": "object",
+			"properties": {
+				"title": {
+					"type": "string",
+					"minLength": 1,
+					"title": "Title",
+					"x-input": "title"
+				}
+			},
+			"required": ["title"]
+		},
+		{
+			"$ref": "#/definitions/slotOptions"
+		},
+		{
+			"type": "object",
+			"properties": {
+				"categories": {
+					"title": "Categories",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"x-input": "categorymultiselect"
+					}
+				}
+			}
+		}
+	],
+	"x-ui-schema": {
+		"label": "New slot",
+		"schema": "#/definitions/newSlot",
+		"name": "newSlot",
+		"popup_size": "medium"
+	},
+	"patternProperties": {
+		"^[a-zA-Z0-9_-]+$": {
+			"allOf": [
+				{
+					"$ref": "#/definitions/slotOptions"
+				}
+			]
+		}
+	}
+}
+

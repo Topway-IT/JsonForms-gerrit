@@ -1,0 +1,568 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "EasyMDE Widget Options",
+	"description": "Configuration options for the EasyMDE Markdown Editor widget",
+	"type": "object",
+	"x-default-properties": [],
+	"properties": {
+		"placeholder": {
+			"type": "string",
+			"description": "Placeholder text for the editor",
+			"default": "Write your Markdown here..."
+		},
+		"minHeight": {
+			"type": "string",
+			"pattern": "^\\d+(px|em|rem|vh|%)$",
+			"description": "Minimum height of the editor",
+			"default": "300px",
+			"examples": ["300px", "20em", "50vh"]
+		},
+		"maxHeight": {
+			"type": "string",
+			"pattern": "^\\d+(px|em|rem|vh|%)$",
+			"description": "Maximum height of the editor",
+			"default": "500px",
+			"examples": ["500px", "30em", "80vh"]
+		},
+		"spellChecker": {
+			"type": "boolean",
+			"description": "Enable/disable spell checking",
+			"default": true
+		},
+		"lineWrapping": {
+			"type": "boolean",
+			"description": "Enable/disable line wrapping",
+			"default": true
+		},
+		"toolbar": {
+			"type": "array",
+			"description": "Toolbar configuration",
+			"default": [
+				"bold",
+				"italic",
+				"strikethrough",
+				"heading",
+				"|",
+				"code",
+				"quote",
+				"unordered-list",
+				"ordered-list",
+				"check-list",
+				"|",
+				"link",
+				"image",
+				"table",
+				"horizontal-rule",
+				"|",
+				"preview",
+				"side-by-side",
+				"fullscreen",
+				"|",
+				"guide",
+				"undo",
+				"redo"
+			],
+			"items": {
+				"type": "string",
+				"enum": [
+					"bold",
+					"italic",
+					"strikethrough",
+					"heading",
+					"heading-smaller",
+					"heading-bigger",
+					"heading-1",
+					"heading-2",
+					"heading-3",
+					"code",
+					"quote",
+					"unordered-list",
+					"ordered-list",
+					"check-list",
+					"clean-block",
+					"link",
+					"image",
+					"upload-image",
+					"table",
+					"horizontal-rule",
+					"preview",
+					"side-by-side",
+					"fullscreen",
+					"guide",
+					"undo",
+					"redo",
+					"|"
+				]
+			}
+		},
+		"autosave": {
+			"type": "object",
+			"description": "Autosave configuration",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Enable/disable autosave",
+					"default": false
+				},
+				"delay": {
+					"type": "integer",
+					"description": "Delay in milliseconds before autosaving",
+					"default": 10000,
+					"minimum": 1000
+				},
+				"text": {
+					"type": "string",
+					"description": "Text prefix for autosave status",
+					"default": "Draft saved: "
+				},
+				"submit_delay": {
+					"type": "integer",
+					"description": "Delay before autosaving on form submission",
+					"minimum": 100
+				},
+				"timeFormat": {
+					"type": "object",
+					"description": "Time format for autosave status",
+					"properties": {
+						"locale": {
+							"type": "string",
+							"description": "Locale for time formatting",
+							"default": "en-US"
+						},
+						"format": {
+							"type": "object",
+							"description": "Format options for Intl.DateTimeFormat",
+							"properties": {
+								"hour": {
+									"type": "string",
+									"enum": ["2-digit", "numeric"],
+									"default": "2-digit"
+								},
+								"minute": {
+									"type": "string",
+									"enum": ["2-digit", "numeric"],
+									"default": "2-digit"
+								}
+							}
+						}
+					}
+				}
+			},
+			"required": ["enabled"]
+		},
+		"showIcons": {
+			"type": "array",
+			"description": "Toolbar icons to show (overrides default visibility)",
+			"items": {
+				"type": "string",
+				"enum": [
+					"bold",
+					"italic",
+					"strikethrough",
+					"heading",
+					"heading-smaller",
+					"heading-bigger",
+					"heading-1",
+					"heading-2",
+					"heading-3",
+					"code",
+					"quote",
+					"unordered-list",
+					"ordered-list",
+					"check-list",
+					"clean-block",
+					"link",
+					"image",
+					"upload-image",
+					"table",
+					"horizontal-rule",
+					"preview",
+					"side-by-side",
+					"fullscreen",
+					"guide",
+					"undo",
+					"redo"
+				]
+			},
+			"default": []
+		},
+		"hideIcons": {
+			"type": "array",
+			"description": "Toolbar icons to hide",
+			"items": {
+				"type": "string",
+				"enum": [
+					"bold",
+					"italic",
+					"strikethrough",
+					"heading",
+					"heading-smaller",
+					"heading-bigger",
+					"heading-1",
+					"heading-2",
+					"heading-3",
+					"code",
+					"quote",
+					"unordered-list",
+					"ordered-list",
+					"check-list",
+					"clean-block",
+					"link",
+					"image",
+					"upload-image",
+					"table",
+					"horizontal-rule",
+					"preview",
+					"side-by-side",
+					"fullscreen",
+					"guide",
+					"undo",
+					"redo"
+				]
+			},
+			"default": []
+		},
+		"promptURLs": {
+			"type": "boolean",
+			"description": "Prompt for URLs when inserting links/images",
+			"default": true
+		},
+		"previewImagesInEditor": {
+			"type": "boolean",
+			"description": "Preview images directly in the editor",
+			"default": true
+		},
+		"status": {
+			"type": "array",
+			"description": "Status bar items to display",
+			"default": ["autosave", "lines", "words", "cursor"],
+			"items": {
+				"type": "string",
+				"enum": ["autosave", "lines", "words", "cursor", "upload-image"]
+			}
+		},
+		"toolbarTips": {
+			"type": "boolean",
+			"description": "Show toolbar tooltips",
+			"default": true
+		},
+		"indentWithTabs": {
+			"type": "boolean",
+			"description": "Use tabs for indentation",
+			"default": true
+		},
+		"previewRender": {
+			"type": ["function", "null"],
+			"description": "Custom preview render function",
+			"default": null
+		},
+		"renderingConfig": {
+			"type": "object",
+			"description": "Markdown rendering configuration",
+			"properties": {
+				"singleLineBreaks": {
+					"type": "boolean",
+					"description": "Enable single line breaks",
+					"default": true
+				},
+				"codeSyntaxHighlighting": {
+					"type": "boolean",
+					"description": "Enable code syntax highlighting",
+					"default": false
+				},
+				"markedOptions": {
+					"type": "object",
+					"description": "Options passed to marked.js"
+				},
+				"sanitizerFunction": {
+					"type": ["function", "null"],
+					"description": "Custom HTML sanitizer function"
+				},
+				"hljs": {
+					"type": ["object", "null"],
+					"description": "Highlight.js instance for syntax highlighting"
+				}
+			}
+		},
+		"blockStyles": {
+			"type": "object",
+			"description": "Block style customization",
+			"properties": {
+				"bold": {
+					"type": "string",
+					"description": "Bold marker",
+					"default": "**"
+				},
+				"italic": {
+					"type": "string",
+					"description": "Italic marker",
+					"default": "*"
+				},
+				"code": {
+					"type": "string",
+					"description": "Code block marker",
+					"default": "```"
+				}
+			}
+		},
+		"insertTexts": {
+			"type": "object",
+			"description": "Custom insert text templates",
+			"properties": {
+				"link": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": ["[", "](#url#)"]
+				},
+				"image": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": ["![", "](#url#)"]
+				},
+				"uploadedImage": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": ["![](#url#)", ""]
+				},
+				"table": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": [
+						"",
+						"\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text     | Text     |\n\n"
+					]
+				},
+				"horizontalRule": {
+					"type": "array",
+					"items": { "type": "string" },
+					"default": ["", "\n\n-----\n\n"]
+				}
+			}
+		},
+		"promptTexts": {
+			"type": "object",
+			"description": "Custom prompt texts",
+			"properties": {
+				"link": {
+					"type": "string",
+					"description": "Prompt text for link URL",
+					"default": "URL for the link:"
+				},
+				"image": {
+					"type": "string",
+					"description": "Prompt text for image URL",
+					"default": "URL of the image:"
+				}
+			}
+		},
+		"shortcuts": {
+			"type": "object",
+			"description": "Custom keyboard shortcuts",
+			"properties": {
+				"toggleBold": { "type": "string", "default": "Cmd-B" },
+				"toggleItalic": { "type": "string", "default": "Cmd-I" },
+				"drawLink": { "type": "string", "default": "Cmd-K" },
+				"toggleHeadingSmaller": { "type": "string", "default": "Cmd-H" },
+				"toggleHeadingBigger": { "type": "string", "default": "Shift-Cmd-H" },
+				"toggleHeading1": { "type": "string", "default": "Ctrl+Alt+1" },
+				"toggleHeading2": { "type": "string", "default": "Ctrl+Alt+2" },
+				"toggleHeading3": { "type": "string", "default": "Ctrl+Alt+3" },
+				"toggleHeading4": { "type": "string", "default": "Ctrl+Alt+4" },
+				"toggleHeading5": { "type": "string", "default": "Ctrl+Alt+5" },
+				"toggleHeading6": { "type": "string", "default": "Ctrl+Alt+6" },
+				"cleanBlock": { "type": "string", "default": "Cmd-E" },
+				"drawImage": { "type": "string", "default": "Cmd-Alt-I" },
+				"toggleBlockquote": { "type": "string", "default": "Cmd-'" },
+				"toggleOrderedList": { "type": "string", "default": "Cmd-Alt-L" },
+				"toggleUnorderedList": { "type": "string", "default": "Cmd-L" },
+				"toggleCheckList": { "type": "string", "default": "Shift-Cmd-L" },
+				"toggleCodeBlock": { "type": "string", "default": "Cmd-Alt-C" },
+				"togglePreview": { "type": "string", "default": "Cmd-P" },
+				"toggleSideBySide": { "type": "string", "default": "F9" },
+				"toggleFullScreen": { "type": "string", "default": "F11" }
+			}
+		},
+		"unorderedListStyle": {
+			"type": "string",
+			"enum": ["*", "-", "+"],
+			"description": "Style for unordered lists",
+			"default": "*"
+		},
+		"inputStyle": {
+			"type": "string",
+			"enum": ["textarea", "contenteditable"],
+			"description": "Input style for the editor"
+		},
+		"nativeSpellcheck": {
+			"type": "boolean",
+			"description": "Use native browser spellcheck",
+			"default": true
+		},
+		"autoRefresh": {
+			"type": "boolean",
+			"description": "Auto-refresh the editor when hidden",
+			"default": false
+		},
+		"theme": {
+			"type": "string",
+			"description": "Editor theme",
+			"default": "easymde"
+		},
+		"tabSize": {
+			"type": "integer",
+			"description": "Tab size in spaces",
+			"default": 2,
+			"minimum": 1,
+			"maximum": 8
+		},
+		"indentUnit": {
+			"type": "integer",
+			"description": "Indentation unit size",
+			"default": 2,
+			"minimum": 1,
+			"maximum": 8
+		},
+		"lineNumbers": {
+			"type": "boolean",
+			"description": "Show line numbers",
+			"default": false
+		},
+		"autofocus": {
+			"type": "boolean",
+			"description": "Auto-focus the editor on load",
+			"default": false
+		},
+		"direction": {
+			"type": "string",
+			"enum": ["ltr", "rtl"],
+			"description": "Text direction",
+			"default": "ltr"
+		},
+		"scrollbarStyle": {
+			"type": "string",
+			"enum": ["native", "null"],
+			"description": "Scrollbar style",
+			"default": "native"
+		},
+		"styleSelectedText": {
+			"type": ["boolean", "string"],
+			"description": "Style for selected text",
+			"default": true
+		},
+		"forceSync": {
+			"type": "boolean",
+			"description": "Force sync between textarea and editor",
+			"default": false
+		},
+		"sideBySideFullscreen": {
+			"type": "boolean",
+			"description": "Enable side-by-side fullscreen mode",
+			"default": false
+		},
+		"syncSideBySidePreviewScroll": {
+			"type": "boolean",
+			"description": "Sync scroll between editor and preview in side-by-side mode",
+			"default": true
+		},
+		"autoDownloadFontAwesome": {
+			"type": "boolean",
+			"description": "Auto-download Font Awesome",
+			"default": true
+		},
+		"toolbarButtonClassPrefix": {
+			"type": "string",
+			"description": "Prefix for toolbar button CSS classes"
+		},
+		"toolbarGuideIcon": {
+			"type": "boolean",
+			"description": "Show guide icon in toolbar",
+			"default": true
+		},
+		"initialValue": {
+			"type": "string",
+			"description": "Initial editor content"
+		},
+		"uploadImage": {
+			"type": "boolean",
+			"description": "Enable image upload",
+			"default": false
+		},
+		"imageUploadFunction": {
+			"type": ["function", "null"],
+			"description": "Custom image upload function"
+		},
+		"imageUploadEndpoint": {
+			"type": "string",
+			"description": "Endpoint for image uploads"
+		},
+		"imageMaxSize": {
+			"type": "integer",
+			"description": "Maximum image size in bytes",
+			"default": 2097152
+		},
+		"imageAccept": {
+			"type": "string",
+			"description": "Accepted image MIME types",
+			"default": "image/png, image/jpeg, image/gif, image/avif"
+		},
+		"imageCSRFToken": {
+			"type": "string",
+			"description": "CSRF token for image uploads"
+		},
+		"imageCSRFName": {
+			"type": "string",
+			"description": "CSRF field name",
+			"default": "csrfmiddlewaretoken"
+		},
+		"imageCSRFHeader": {
+			"type": "boolean",
+			"description": "Use CSRF header instead of form field",
+			"default": false
+		},
+		"imageInputName": {
+			"type": "string",
+			"description": "Image input field name",
+			"default": "image"
+		},
+		"imagePathAbsolute": {
+			"type": "boolean",
+			"description": "Use absolute paths for uploaded images",
+			"default": false
+		},
+		"imagesPreviewHandler": {
+			"type": ["function", "null"],
+			"description": "Custom image preview handler"
+		},
+		"imageTexts": {
+			"type": "object",
+			"description": "Image upload status texts",
+			"properties": {
+				"sbInit": { "type": "string" },
+				"sbOnDragEnter": { "type": "string" },
+				"sbOnDrop": { "type": "string" },
+				"sbProgress": { "type": "string" },
+				"sbOnUploaded": { "type": "string" },
+				"sizeUnits": { "type": "string" }
+			}
+		},
+		"errorMessages": {
+			"type": "object",
+			"description": "Error message texts",
+			"properties": {
+				"noFileGiven": { "type": "string" },
+				"typeNotAllowed": { "type": "string" },
+				"fileTooLarge": { "type": "string" },
+				"importError": { "type": "string" }
+			}
+		},
+		"errorCallback": {
+			"type": ["function", "null"],
+			"description": "Error callback function"
+		},
+		"onToggleFullScreen": {
+			"type": ["function", "null"],
+			"description": "Callback when fullscreen is toggled"
+		}
+	},
+	"additionalProperties": false
+}
