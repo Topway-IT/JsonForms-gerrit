@@ -1,0 +1,75 @@
+{
+	"required": [
+		"title"
+	],
+	"type": "object",
+	"title": "Book",
+	"properties": {
+		"title": {
+			"type": "string",
+			"title": "Title",
+			"description": "",
+			"x-format": "text",
+			"x-input": "OO.ui.TextInputWidget",
+			"x-input-config": {}
+		},
+		"authors": {
+			"type": "array",
+			"title": "Authors",
+			"uniqueItems": true,
+			"items": {
+				"type": "object",
+				"properties": {
+					"first_name": {
+						"type": "string",
+						"format": "text",
+						"title": "First name"
+					},
+					"last_name": {
+						"type": "string",
+						"format": "text",
+						"title": "Last name"
+					},
+					"email": {
+						"type": "string",
+						"format": "email",
+						"title": "Email"
+					}
+				},
+				"required": [
+					"first_name",
+					"last_name"
+				],
+				"title": "",
+				"description": "",
+				"x-layout": "default"
+			},
+			"description": "",
+			"x-layout": "default"
+		},
+		"cover": {
+			"type": "string",
+			"title": "Cover",
+			"description": "",
+			"x-format": "file",
+			"x-input": "OO.ui.SelectFileWidget",
+			"x-input-config": {
+				"accept": [
+					"image/svg+xml",
+					"image/png",
+					"image/gif",
+					"image/jpeg",
+					"image/pjpeg",
+					"image/webp",
+					"image/tiff",
+					"image/x-tiff",
+					"image/bmp",
+					"image/x-windows-bmp"
+				]
+			}
+		}
+	},
+	"description": "",
+	"x-layout": "default",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Book"
+}

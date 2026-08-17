@@ -1,0 +1,53 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Comment",
+	"x-render-template": "Template:Comments.comments.Item",
+	"title": "",
+	"description": "",
+	"x-layout": "default",
+	"type": "object",
+	"required": [
+		"content",
+		"createdAt",
+		"name"
+	],
+	"properties": {
+		"name": {
+			"type": "string",
+			"title": "",
+			"description": "",
+			"x-format": "text",
+			"x-input": "OO.ui.TextInputWidget",
+			"x-input-config": {}
+		},
+		"content": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 10000,
+			"title": "",
+			"x-format": "wikitext",
+			"x-input": "VisualEditor",
+			"x-input-config": {}
+		},
+		"createdAt": {
+			"type": "string",
+			"title": "",
+			"description": "",
+			"x-input": "OO.ui.TextInputWidget",
+			"x-input-config": {},
+			"x-format": "text",
+			"x-hidden": true,
+			"x-value-formula": "{{CURRENTTIMESTAMP}}"
+		},
+		"replies": {
+			"type": "array",
+			"x-hidden": true,
+			"title": "",
+			"description": "",
+			"x-layout": "default",
+			"items": {
+				"$ref": "#"
+			},
+			"x-render-template": "Comments.comments.Item.replies"
+		}
+	}
+}

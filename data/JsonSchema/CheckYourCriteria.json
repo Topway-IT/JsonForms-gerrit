@@ -1,0 +1,369 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"x-layout": "default",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Check_your_criteria",
+	"type": "object",
+	"title": "Check your criteria",
+	"description": "Check your criteria before lodging a complaint to the European Commission about a potential breach of EU Law by a Member State",
+	"properties": {
+		"note": {
+			"type": "null",
+			"title": "",
+			"description": "Inspired from the form [https://ec.europa.eu/law/application-eu-law/report-breach/en/check-your-criteria check-your-criteria]",
+			"x-format": "info",
+			"x-title-format": "wikitext",
+			"x-description-format": "wikitext",
+			"x-required": false,
+			"x-input-config": {}
+		},
+		"complaint_or_info": {
+			"type": "string",
+			"title": "Would you like to lodge a complaint or would you like to request information?",
+			"description": "",
+			"x-format": "text",
+			"x-input": "OO.ui.ButtonSelectWidget",
+			"x-input-config": {},
+			"default": "",
+			"enum": [
+				"Lodge a complaint",
+				"Request information"
+			],
+			"x-required": false,
+			"x-format-type": "custom"
+		},
+		"complaint_flow": {
+			"type": "object",
+			"title": "Complaint flow",
+			"x-no-title": true,
+			"x-compact": true,
+			"x-dependency": {
+				"complaint_or_info": "Lodge a complaint"
+			},
+			"properties": {
+				"national_authority": {
+					"type": "string",
+					"title": "Does your complaint concern a national authority in an EU country?",
+					"description": "",
+					"x-format": "text",
+					"x-input": "OO.ui.ButtonSelectWidget",
+					"x-input-config": {},
+					"default": "",
+					"enum": [
+						"yes",
+						"no"
+					],
+					"x-required": false,
+					"x-format-type": "custom"
+				},
+				"national_authority_yes": {
+					"type": "object",
+					"x-compact": true,
+					"x-dependency": {
+						"national_authority": "yes"
+					},
+					"properties": {
+						"ms_or_eu": {
+							"type": "string",
+							"title": "Does the complaint concern the application of EU law by a national authority?",
+							"description": "",
+							"x-format": "text",
+							"x-input": "OO.ui.ButtonSelectWidget",
+							"x-input-config": {},
+							"default": "",
+							"enum": [
+								"yes",
+								"no"
+							],
+							"x-required": false,
+							"x-format-type": "custom"
+						},
+						"ms_or_eu_yes": {
+							"type": "object",
+							"x-compact": true,
+							"x-no-title": true,
+							"x-dependency": {
+								"ms_or_eu": "yes"
+							},
+							"properties": {
+								"act_or_omission": {
+									"type": "string",
+									"title": "Does the complaint concern an act or an omission by the national authority?",
+									"description": "",
+									"x-format": "text",
+									"x-input": "OO.ui.ButtonSelectWidget",
+									"x-input-config": {},
+									"default": "",
+									"enum": [
+										"Act",
+										"Omission"
+									],
+									"x-required": false,
+									"x-format-type": "custom"
+								},
+								"act_flow": {
+									"type": "object",
+									"x-compact": true,
+									"x-no-title": true,
+									"x-dependency": {
+										"act_or_omission": "Act"
+									},
+									"properties": {
+										"act_description": {
+											"type": "string",
+											"title": "Please describe the act of the national authority",
+											"description": "",
+											"x-format": "textarea",
+											"x-input": "OO.ui.MultilineTextInputWidget",
+											"x-input-config": {},
+											"x-required": false
+										},
+										"eu_law_breach": {
+											"type": "string",
+											"title": "Which EU law provisions have been breached?",
+											"description": "",
+											"x-format": "textarea",
+											"x-input": "OO.ui.MultilineTextInputWidget",
+											"x-input-config": {},
+											"x-required": false
+										},
+										"exhausted_remedies": {
+											"type": "string",
+											"title": "Have you exhausted all available domestic remedies?",
+											"description": "Have you used all possible legal remedies in the Member State concerned?",
+											"x-format": "text",
+											"x-input": "OO.ui.ButtonSelectWidget",
+											"x-input-config": {},
+											"default": "",
+											"enum": [
+												"yes",
+												"no"
+											],
+											"x-required": false,
+											"x-format-type": "custom"
+										},
+										"exhausted_remedies_yes": {
+											"type": "string",
+											"title": "Please provide details of the domestic remedies you have pursued",
+											"description": "",
+											"x-format": "textarea",
+											"x-input": "OO.ui.MultilineTextInputWidget",
+											"x-input-config": {},
+											"x-required": false,
+											"x-dependency": {
+												"exhausted_remedies": "yes"
+											}
+										},
+										"exhausted_remedies_no": {
+											"type": "null",
+											"title": "",
+											"x-no-title": true,
+											"description": "The European Commission generally requires complainants to exhaust all available domestic remedies before lodging a complaint. You may consider pursuing national remedies first.",
+											"x-format": "info",
+											"x-description-format": "wikitext",
+											"x-required": false,
+											"x-dependency": {
+												"exhausted_remedies": "no"
+											}
+										}
+									},
+									"required": [],
+									"title": "",
+									"description": "",
+									"x-required": false,
+									"x-layout": "default"
+								},
+								"omission_flow": {
+									"type": "object",
+									"x-compact": true,
+									"x-no-title": true,
+									"x-dependency": {
+										"act_or_omission": "Omission"
+									},
+									"properties": {
+										"omission_description": {
+											"type": "string",
+											"title": "Please describe the omission by the national authority",
+											"description": "",
+											"x-format": "textarea",
+											"x-input": "OO.ui.MultilineTextInputWidget",
+											"x-input-config": {},
+											"x-required": false
+										},
+										"eu_law_breach_omission": {
+											"type": "string",
+											"title": "Which EU law provisions have been breached by the omission?",
+											"description": "",
+											"x-format": "textarea",
+											"x-input": "OO.ui.MultilineTextInputWidget",
+											"x-input-config": {},
+											"x-required": false
+										},
+										"omission_remedies": {
+											"type": "string",
+											"title": "Have you taken any action to seek a remedy for this omission?",
+											"description": "",
+											"x-format": "text",
+											"x-input": "OO.ui.ButtonSelectWidget",
+											"x-input-config": {},
+											"default": "",
+											"enum": [
+												"yes",
+												"no"
+											],
+											"x-required": false,
+											"x-format-type": "custom"
+										},
+										"omission_remedies_yes": {
+											"type": "object",
+											"x-compact": true,
+											"x-no-title": true,
+											"x-dependency": {
+												"omission_remedies": "yes"
+											},
+											"properties": {
+												"remedy_description": {
+													"type": "string",
+													"title": "Please describe the action(s) you have taken to seek a remedy",
+													"description": "",
+													"x-format": "textarea",
+													"x-input": "OO.ui.MultilineTextInputWidget",
+													"x-input-config": {},
+													"x-required": false
+												},
+												"remedy_result": {
+													"type": "string",
+													"title": "What was the outcome of the action(s) you took?",
+													"description": "",
+													"x-format": "textarea",
+													"x-input": "OO.ui.MultilineTextInputWidget",
+													"x-input-config": {},
+													"x-required": false
+												},
+												"national_proceedings": {
+													"type": "string",
+													"title": "Are there any ongoing national proceedings related to this omission?",
+													"description": "",
+													"x-format": "text",
+													"x-input": "OO.ui.ButtonSelectWidget",
+													"x-input-config": {},
+													"default": "",
+													"enum": [
+														"yes",
+														"no"
+													],
+													"x-required": false,
+													"x-format-type": "custom"
+												},
+												"national_proceedings_details": {
+													"type": "string",
+													"title": "Please provide details of the ongoing national proceedings",
+													"description": "",
+													"x-format": "textarea",
+													"x-input": "OO.ui.MultilineTextInputWidget",
+													"x-input-config": {},
+													"x-required": false,
+													"x-dependency": {
+														"national_proceedings": "yes"
+													}
+												}
+											},
+											"required": [],
+											"title": "",
+											"description": "",
+											"x-required": false,
+											"x-layout": "default"
+										},
+										"omission_remedies_no": {
+											"type": "null",
+											"title": "",
+											"x-no-title": true,
+											"description": "The European Commission generally requires complainants to have taken some action to seek a remedy before lodging a complaint. You may consider taking appropriate action first.",
+											"x-format": "info",
+											"x-description-format": "wikitext",
+											"x-required": false,
+											"x-dependency": {
+												"omission_remedies": "no"
+											},
+											"x-input-config": {}
+										}
+									},
+									"required": [],
+									"title": "",
+									"description": "",
+									"x-required": false,
+									"x-layout": "default"
+								}
+							},
+							"required": [],
+							"title": "",
+							"description": "",
+							"x-required": false,
+							"x-layout": "default"
+						},
+						"ms_or_eu_no": {
+							"type": "null",
+							"title": "",
+							"x-no-title": true,
+							"description": "The complaint does not concern the application of EU law by a national authority. The Commission may not be able to investigate this complaint.",
+							"x-format": "info",
+							"x-description-format": "wikitext",
+							"x-required": false,
+							"x-dependency": {
+								"ms_or_eu": "no"
+							},
+							"x-input-config": {}
+						}
+					},
+					"required": [],
+					"title": "",
+					"description": "",
+					"x-required": false,
+					"x-layout": "default",
+					"x-no-title": true
+				},
+				"national_authority_no": {
+					"type": "null",
+					"title": "",
+					"x-no-title": true,
+					"description": "The Commission cannot help you in this case. You should address your complaint to a national body, they may be able to help you.",
+					"x-format": "info",
+					"x-description-format": "wikitext",
+					"x-required": false,
+					"x-dependency": {
+						"national_authority": "no"
+					},
+					"x-input-config": {}
+				}
+			},
+			"required": [],
+			"description": "",
+			"x-required": false,
+			"x-layout": "default"
+		},
+		"request_info_flow": {
+			"type": "object",
+			"x-compact": true,
+			"title": "Information request flow",
+			"x-dependency": {
+				"complaint_or_info": "Request information"
+			},
+			"properties": {
+				"info_message": {
+					"x-no-title": true,
+					"type": "null",
+					"title": "",
+					"description": "You need information about:\n\n* the [https://commission.europa.eu/index_en European Commission]\n* the European Commission's role in [https://commission.europa.eu/law/application-eu-law_en ensuring that EU law is properly applied]\n* [https://europa.eu/youreurope/advice/index_en.htm legal advice about your rights in the EU single market]\n* [https://europa.eu/youreurope/en practical help and advice] on life, work, business and travel in the EU\n* [https://ec.europa.eu/solvit/index_en.htm SOLVIT network], if you are having problems dealing with public authorities in another EU country than your home country\n* the [https://www.europarl.europa.eu/at-your-service/en/be-heard/petitions European Parliament's petitions committee], especially if you consider starting or joining a petition\n* the [https://www.ombudsman.europa.eu/en/home European Ombudsman]",
+					"x-format": "info",
+					"x-description-format": "wikitext",
+					"x-required": false,
+					"x-input-config": {}
+				}
+			},
+			"required": [],
+			"description": "",
+			"x-required": false,
+			"x-layout": "default"
+		}
+	},
+	"required": []
+}

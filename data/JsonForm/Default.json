@@ -1,0 +1,48 @@
+{
+	"name": "",
+	"schema": "",
+	"action": "",
+	"edit": "",
+	"ugroups": [
+		"user"
+	],
+	"captcha": false,
+	"pagename_formula": "",
+	"overwrite_existing_article_on_create": false,
+	"slot": "jsonforms-data",
+	"edit_freetext": false,
+	"edit_categories": false,
+	"default_categories": [],
+	"preload_article": "",
+	"preload_wikitext": "",
+	"return": "target",
+	"return_page": "",
+	"return_url": "",
+	"edit_path": "",
+	"edit_schema": "",
+	"infobox": {
+		"show_infobox": true,
+		"infobox_position": "right",
+		"infobox_template": ""
+	},
+	"view": "inline",
+	"popup_button_config": {
+	},
+	"popup_size": "medium",
+	"css_class": "",
+	"width": "600px",
+	"editor_options": {
+		"base_options": "MediaWiki:DefaultEditorOptions",
+		"base_script": "MediaWiki:DefaultEditorScript",
+		"validation": "onsubmit",
+		"template": "default",
+		"max_depth": 32,
+		"path_separator": ".",
+		"default_additional_properties": false,
+		"use_lazy_properties": "threshold",
+		"lazy_properties_threshold": 6,
+		"remove_empty_properties": true,
+		"remove_false_properties": false,
+		"debug": false
+	}
+}

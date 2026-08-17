@@ -1,0 +1,478 @@
+{
+	"$schema": "https:\/\/json-schema.org\/draft\/2020-12\/schema",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/CreatePageForm",
+	"type": "object",
+	"title": "Create\/edit form",
+	"required": ["name", "schema"],
+	"x-layout": "tabs",
+	"x-group-properties": {
+		"appearance": [
+			"display_path",
+			"view",
+			"popup_button_config",
+			"popup_size",
+			"css_class",
+			"width",
+			"title",
+			"hide_title"
+		]
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"title": "Form name",
+			"description": "Unique identifier for the use in the parser function {{#jsonforms: <form name> }} to print this form in any wiki page",
+			"minLength": 1
+		},
+		"schema": {
+			"type": "string",
+			"title": "JSON Schema",
+			"description": "",
+			"default": "",
+			"minLength": 1,
+			"description": "any schema listed {{#querylink: Special:PrefixIndex|here|namespace=2100}}",
+			"x-description-format": "wikitext",
+			"x-enum-provider": "jsonSchemas"
+		},
+		"action": {
+			"type": "string",
+			"default": "",
+			"enum": ["create", "edit", "none"],
+			"description": "\"none\" should only be used when the submitted data is handled by a callback declared in [[MediaWiki:DefaultEditorOptions]]",
+			"x-description-format": "wikitext"	
+		},
+		"edit": {
+			"type": "string",
+			"title": "Edit page",
+			"description": "Page to edit",
+			"default": "",
+			"x-input": "mw.widgets.TitleInputWidget",
+			"x-dependency": {
+				"action": "edit"
+			}
+		},
+		"ugroups": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"x-input": "OO.ui.MenuTagMultiselectWidget",
+				"x-enum-provider": "uGroups"
+			},
+			"default": ["user"],
+			"title": "Restrict to groups"
+		},
+		"captcha": {
+			"type": "boolean",
+			"description": "Add captcha to form",
+			"default": false,
+			"x-dependency": {
+				"path": "ugroups",
+				"op": "contains",
+				"value": "*"
+			}
+		},
+		"pagename_formula": {
+			"type": "string",
+			"title": "Page name formula",
+			"description": "can contain wikitext, properties values are retrieved using an expression like <parent.child> (e.g. <name> or <address.country>)",
+			"default": "",
+			"x-dependency": {
+				"action": "create"
+			}
+		},
+		"create_only_fields": {
+			"type": "array",
+			"title": "Create-only fields",
+			"description": "Add properties (usually used in the pagename formula) that must be shown only on data creation",
+			"default": [],
+			"items": {
+				"type": "string"
+			},
+			"x-input": "OO.ui.TagMultiselectWidget",
+			"x-dependency": {
+				"path": "pagename_formula",
+				"op": "!=",
+				"value": ""
+			}
+		},
+		"overwrite_existing_article_on_create": {
+			"type": "boolean",
+			"title": "Overwrite existing article",
+			"description": "If enabled, existing articles with the same name will be overwritten",
+			"default": false,
+			"x-dependency": {
+				"path": "pagename_formula",
+				"op": "!=",
+				"value": ""
+			}
+		},
+		"slot": {
+			"type": "string",
+			"title": "target slot",
+			"description": "Default slot for form data: if different from main the related article will be saved as a [https://www.mediawiki.org/wiki/Multi-Content_Revisions Multi-Content-Revision]",
+			"x-description-format": "wikitext",
+			"default": "jsonforms-data",
+			"x-enum-provider": "jsonSlots"
+		},
+		"edit_freetext": {
+			"type": "boolean",
+			"title": "Edit freetext",
+			"description": "",
+			"default": false,
+			"x-dependency": {
+				"path": "slot",
+				"op": "!=",
+				"value": "main"
+			}
+		},
+		"edit_categories": {
+			"type": "boolean",
+			"title": "Edit categories",
+			"default": false,
+			"description": "Is the user allowed to edit categories before submitting the form ?"
+		},
+		"default_categories": {
+			"title": "Default categories",
+			"description": "only if Edit categories is enabled",
+			"type": "array",
+			"x-input": "mw.widgets.CategoryMultiselectWidget",
+			"items": {
+				"type": "string"
+			},
+			"x-dependency": {
+				"path": "edit_categories",
+				"op": "!=",
+				"value": false
+			}
+		},
+		"preload": {
+			"type": "string",
+			"title": "Preload",
+			"description": "Preload page or wikitext",
+			"default": "",
+			"enum": ["none", "article", "wikitext"],
+			"default": "none",
+			"x-dependency": {
+				"and": [
+					{
+						"path": "action",
+						"op": "==",
+						"value": "create"
+					},
+					{
+						"path": "slot",
+						"op": "!=",
+						"value": "main"
+					}
+				]
+			}
+		},
+		"preload_article": {
+			"type": "string",
+			"title": "Preload page",
+			"description": "Page to preload content from",
+			"default": "",
+			"x-input": "mw.widgets.TitleInputWidget",
+			"x-dependency": {
+				"and": [
+					{
+						"path": "preload",
+						"op": "==",
+						"value": "article"
+					}
+				]
+			}
+		},
+		"preload_wikitext": {
+			"type": "string",
+			"title": "Preload wikitext",
+			"description": "Preload wikitext into the target article. (Performs substitutions using an expression like <parent.child>).",
+			"default": "",
+			"x-format": "textarea",
+			"x-dependency": {
+				"and": [
+					{
+						"path": "preload",
+						"op": "==",
+						"value": "wikitext"
+					}
+				]
+			}
+		},
+		"return": {
+			"type": "string",
+			"title": "Return",
+			"description": "Page to redirect to after completion",
+			"enum": ["target", "none", "article", "url"],
+			"default": "target"
+		},
+		"return_page": {
+			"type": "string",
+			"title": "Return page",
+			"x-input": "mw.widgets.TitleInputWidget",
+			"description": "Page to redirect to after completion",
+			"default": "",
+			"x-dependency": {
+				"path": "return",
+				"op": "==",
+				"value": "article"
+			}
+		},
+		"return_url": {
+			"type": "string",
+			"title": "Return URL",
+			"description": "External URL to redirect to after completion. (Performs substitutions using an expression like <parent.child>)",
+			"format": "uri",
+			"default": "",
+			"x-dependency": {
+				"path": "return",
+				"op": "==",
+				"value": "url"
+			}
+		},
+		"edit_path": {
+			"type": "string",
+			"format": "text",
+			"title": "Edit path",
+			"description": "Target path for form data (dot separated &ndash; array items can be added with &lt;path&gt;.[])",
+			"x-description-format": "html",
+			"default": ""
+		},
+		"edit_jsonpath": {
+			"type": "string",
+			"format": "text",
+			"x-hidden": true,
+			"default": ""
+		},
+		"edit_schema": {
+			"type": "string",
+			"title": "Edit schema",
+			"format": "text",
+			"description": "Partial schema for editing 'edit_path'",
+			"default": "",
+			"x-enum-provider": "jsonSchemas",
+			"default": "",
+			"x-dependency": {
+				"path": "edit_path",
+				"op": "!=",
+				"value": ""
+			}
+		},
+		"infobox": {
+			"type": "object",
+			"x-show": true,
+			"x-dependency": {
+				"path": "slot",
+				"op": "!=",
+				"value": "main"
+			},
+			"properties": {
+				"show_infobox": {
+					"type": "boolean",
+					"title": "Show Infobox",
+					"description": "Whether to show an infobox on the target page",
+					"default": true
+				},
+				"infobox_position": {
+					"type": "string",
+					"title": "Infobox position",
+					"enum": ["right", "left", "top", "bottom"],
+					"default": "right",
+					"x-dependency": {
+						"path": "show_infobox",
+						"op": "==",
+						"value": true
+					}
+				},
+				"infobox_template": {
+					"type": "string",
+					"title": "Infobox template",
+					"description": "Template to use (leave empty for automatic generation)",
+					"default": "",
+					"x-input": "mw.widgets.TitleInputWidget",
+					"x-input-config": {
+						"namespace": 10
+					},
+					"x-dependency": {
+						"path": "show_infobox",
+						"op": "==",
+						"value": true
+					}
+				}
+			}
+		},
+		"display_path": {
+			"type": "string",
+			"format": "text",
+			"title": "Display path",
+			"description": "Json path to the subschema used to display a partial form (dot separated)",
+			"default": "",
+			"x-hidden": true
+		},
+		"view": {
+			"type": "string",
+			"title": "View mode",
+			"enum": ["inline", "popup"],
+			"default": "inline"
+		},
+		"title": {
+			"type": "string",
+			"title": "Form title",
+			"description": "If different from the form name",
+			"x-dependency": {
+				"view": "inline"
+			}
+		},
+		"hide_title": {
+			"type": "boolean",
+			"title": "Hide form title",
+			"description": "",
+			"default": false,
+			"x-dependency": {
+				"view": "inline"
+			}
+		},
+		"popup_button_config": {
+			"x-collapsible": true,
+			"type": "object",
+			"title": "popup button config",
+			"$ref": "JsonSchema:SchemaBuilder/InputOptions#/definitions/OO.ui.ButtonWidget",
+			"x-dependency": {
+				"view": "popup"
+			}
+		},
+		"popup_size": {
+			"type": "string",
+			"title": "Popup size",
+			"default": "medium",
+			"enum": ["medium", "large", "small"],
+			"x-dependency": {
+				"view": "popup"
+			}
+		},
+		"css_class": {
+			"type": "string",
+			"title": "CSS class",
+			"description": "CSS class applied to the rendered view",
+			"default": ""
+		},
+		"width": {
+			"type": "string",
+			"title": "width",
+			"description": "",
+			"default": "600px",
+			"x-dependency": {
+				"view": "inline"
+			}
+		},
+		"editor_options": {
+			"type": "object",
+			"x-show": true,
+			"title": "editor options",
+			"x-collapsible_": true,
+			"properties": {
+				"base_options": {
+					"type": "string",
+					"title": "base options",
+					"description": "Editor options in the MediaWiki: namespace, javascript content model",
+					"default": "MediaWiki:DefaultEditorOptions",
+					"x-input": "mw.widgets.TitleInputWidget"
+				},
+				"base_script": {
+					"type": "string",
+					"title": "base script",
+					"description": "Editor options in the MediaWiki: namespace, javascript content model",
+					"default": "MediaWiki:DefaultEditorScript",
+					"x-input": "mw.widgets.TitleInputWidget"
+				},
+				"validation": {
+					"type": "string",
+					"enum": ["onsubmit", "always"],
+					"default": "never",
+					"description": "When to show validation errors"
+				},
+				"template": {
+					"type": "string",
+					"enum": [
+						"default",
+						"ejs",
+						"handlebars",
+						"hogan",
+						"lodash",
+						"markup",
+						"mustache",
+						"swig",
+						"underscore"
+					],
+					"default": "default",
+					"description": "UI template to use"
+				},
+				"max_depth": {
+					"title": "max depth",
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 100,
+					"default": 32,
+					"description": "Maximum nesting depth for the editor"
+				},
+				"path_separator": {
+					"title": "path separator",
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 1,
+					"default": ".",
+					"description": "Separator for path strings"
+				},
+				"default_additional_properties": {
+					"title": "default additional properties",
+					"type": "boolean",
+					"default": false,
+					"description": "Default value for additionalProperties in schemas"
+				},
+				"use_lazy_properties": {
+					"title": "use lazy properties",
+					"type": "string",
+					"enum": ["never", "always", "threshold"],
+					"default": "threshold",
+					"description": "When to use lazy loading for properties"
+				},
+				"lazy_properties_threshold": {
+					"title": "lazy properties threshold",
+					"type": "integer",
+					"minimum": 1,
+					"default": 6,
+					"description": "Number of properties at which to enable lazy loading (only used when use_lazy_properties is 'threshold')",
+					"x-dependency": {
+						"use_lazy_properties": "threshold"
+					}
+				},
+				"remove_empty_properties": {
+					"title": "remove empty properties",
+					"type": "boolean",
+					"default": true,
+					"description": "Remove empty properties from the data"
+				},
+				"remove_false_properties": {
+					"title": "remove false properties",
+					"type": "boolean",
+					"default": false,
+					"description": "Remove false properties from the data"
+				},
+				"debug": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable debug mode"
+				}
+			}
+		},
+		"schema_revision": {
+			"type": "integer",
+			"x-hidden": true
+		},
+		"edit_schema_revision": {
+			"type": "integer",
+			"x-hidden": true
+		}
+	}
+}
+

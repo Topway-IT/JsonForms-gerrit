@@ -1,0 +1,95 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SchemaBuilder/EnumTemplate",
+	"title": "EnumTemplate",
+	"description": "Dynamic source for enum options. Can be a static array, a provider reference, or a combination of multiple sources.",
+	"oneOf": [
+		{
+			"title": "Provider Source",
+			"description": "Reference to a watched field that provides options",
+			"type": "object",
+			"properties": {
+				"source": {
+					"type": "string",
+					"description": "Name of the watched field"
+				},
+				"title": {
+					"type": "string",
+					"description": "Template for display title. Use {{item.property}} syntax"
+				},
+				"value": {
+					"type": "string",
+					"description": "Template for option value. Use {{item.property}} syntax"
+				},
+				"filter": {
+					"type": "string",
+					"description": "Filter expression"
+				}
+			},
+			"required": [
+				"source"
+			]
+		},
+		{
+			"title": "Multi-Source Combination",
+			"description": "Combine multiple static arrays and/or providers into one dropdown",
+			"type": "array",
+			"items": {
+				"oneOf": [
+					{
+						"title": "Static Array",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					{
+						"title": "Provider Source",
+						"type": "object",
+						"properties": {
+							"source": {
+								"type": "string"
+							},
+							"title": {
+								"type": "string"
+							},
+							"value": {
+								"type": "string"
+							},
+							"filter": {
+								"oneOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "boolean"
+									}
+								]
+							},
+							"slice": {
+								"type": "array",
+								"items": {
+									"type": "integer"
+								},
+								"minItems": 1,
+								"maxItems": 2
+							},
+							"sort": {
+								"type": "string",
+								"enum": [
+									"asc",
+									"desc"
+								]
+							}
+						},
+						"required": [
+							"source"
+						]
+					}
+				]
+			},
+			"minItems": 1
+		}
+	]
+}
+

@@ -1,0 +1,45 @@
+{
+	"type": "object",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Core/TestFormUI",
+	"title": "TestForm",
+	"x-message": {
+		"label": "Reference: [https://github.com/json-schema-org/JSON-Schema-Test-Suite JSON-Schema-Test-Suite]",
+		"x-label-format": "wikitext"
+	},
+	"x-default-properties": [ "test", "editor" ],
+	"properties": {
+		"draft": {
+			"type": "string",
+			"title": "draft",
+			"enum": [
+				"draft7",
+				"draft2019-09",
+				"draft2020-12"		
+			]
+		},
+		"keyword": {
+			"type": "string",
+			"title": "keyword",
+			"x-watch": "draft",
+			"default": "",
+			"x-enum-provider": "keywords",
+			"x-input": "OO.ui.ButtonSelectWidget"
+		},
+		"testcase": {
+			"type": "string",
+			"title": "testcase",
+			"x-watch": "keyword",
+			"x-enum-provider": "testCase"
+		},
+		"test": {
+			"type": "string",
+			"title": "test",
+			"x-watch": "testcase",
+			"x-enum-provider": "test"
+		},
+		"editor": {
+			"type": "null"
+		}
+	}
+}
+

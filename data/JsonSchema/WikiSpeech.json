@@ -1,0 +1,103 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:Wikispeech",
+	"title": "",
+	"description": "",
+	"x-layout": "default",
+	"x-no-title": true,
+	"type": "object",
+	"properties": {
+		"Voice": {
+			"type": "object",
+			"properties": {
+				"Language": {
+					"type": "string",
+					"title": "",
+					"description": "",
+					"x-format": "text",
+					"x-input": "OO.ui.TextInputWidget",
+					"x-control-config": {
+						"align": "left",
+						"classes": [],
+						"help": "",
+						"helpInline": false,
+						"id": "",
+						"invisibleLabel": false
+					},
+					"x-padding": true,
+					"x-enum-provider": "wikiList",
+					"x-data": {
+						"article": "Template:Languages"
+					}
+				},
+				"Voice": {
+					"type": "string",
+					"title": "",
+					"description": "",
+					"x-format": "text",
+					"x-input": "OO.ui.TextInputWidget",
+					"x-input-config": {},
+					"x-control-config": {
+						"align": "left",
+						"classes": [],
+						"help": "",
+						"helpInline": false,
+						"id": "",
+						"invisibleLabel": false
+					},
+					"x-padding": true,
+					"x-enum-provider": "wikiList",
+					"x-data": {
+						"article": "Template:TTS models"
+					}
+				},
+				"Speech rate": {
+					"type": "number",
+					"title": "'''Speech rate (in percent)'''",
+					"description": "",
+					"x-format": "number",
+					"x-input": "RangeWidget",
+					"x-input-config": {},
+					"minimum": 0,
+					"maximum": 100,
+					"x-title-format": "wikitext"
+				}
+			},
+			"required": [],
+			"title": "",
+			"description": "",
+			"x-layout": "default",
+			"x-border": false
+		},
+		"extra": {
+			"type": "boolean",
+			"title": "read extra information for certain elements",
+			"description": "",
+			"x-input": "OO.ui.CheckboxInputWidget",
+			"x-input-config": {},
+			"x-no-title": false,
+			"x-control-config": {
+				"align": "inline",
+				"classes": [],
+				"help": "",
+				"helpInline": false,
+				"id": "",
+				"invisibleLabel": false
+			}
+		},
+		"Message": {
+			"type": "null",
+			"title": "",
+			"description": "",
+			"x-format": "info",
+			"x-message": {
+				"type": "notice",
+				"label": "Changes to preferences will take effect next time a page is loaded. To listen the current page with the new preferences, reload the page after saving.",
+				"x-label-format": "text",
+				"icon": "",
+				"inline": false
+			},
+			"x-input-config": {}
+		}
+	},
+	"required": []
+}

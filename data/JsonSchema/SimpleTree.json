@@ -1,0 +1,41 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SimpleTree",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Tree Item",
+	"x-layout": "paged",
+	"x-layout-config": {
+		"toggle": true
+	},
+	"description": "A recursive tree structure with item name, active status, and children",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"x-input": "mw.widgets.TitleInputWidget",
+			"description": "The name of the tree item"
+		},
+		"isActive": {
+			"type": "boolean",
+			"description": "Indicates whether the item is active"
+		},
+		"children": {
+			"type": "array",
+			"description": "List of child items, each having the same structure",
+			"items": {
+				"type": "object",
+				"$ref": "#"
+			}
+		}
+	},
+	"required": [
+		"name",
+		"isActive",
+		"children"
+	],
+	"x-message": {
+		"type": "notice",
+		"label": "test message",
+		"inline": false
+	}
+}
+

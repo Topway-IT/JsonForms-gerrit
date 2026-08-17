@@ -1,0 +1,375 @@
+{
+	"$id": "https://wikisphere.org/wiki/JsonSchema:AccidentDetail",
+	"type": "object",
+	"x-layout": "paged",
+	"title": "AccidentDetail",
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"properties": {
+		"accidentDetails": {
+			"$ref": "#/definitions/accidentDetails",
+			"type": "object"
+		},
+		"vehicles": {
+			"x-layout": "tabs",
+			"title": "vehicles",
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/vehicle",
+				"type": "object"
+			}
+		},
+		"people": {
+			"x-layout": "tabs",
+			"type": "array",
+			"title": "people",
+			"items": {
+				"$ref": "#/definitions/person",
+				"type": "object"
+			}
+		}
+	},
+	"definitions": {
+		"person": {
+			"type": "object",
+			"title": "Person",
+			"required": [
+				"_localId",
+				"Injury",
+				"vehicle"
+			],
+			"properties": {
+				"Age": {
+					"type": "integer"
+				},
+				"Sex": {
+					"enum": [
+						"Male",
+						"Female"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Name": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Injury": {
+					"enum": [
+						"Fatal",
+						"Serious",
+						"Minor",
+						"Not injured"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Address": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"vehicle": {
+					"type": "string",
+					"x-watch": {
+						"target": "vehicles"
+					},
+					"x-enum-template": {
+						"title": "{{item.Vehicle type}} {{item.Make}} {{item.Model}}",
+						"value": "{{item._localId}}",
+						"source": "target"
+					}
+				},
+				"Hospital": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"_localId": {
+					"type": "string",
+					"x-format": "uuid",
+					"x-hidden": true,
+					"pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+				},
+				"Involvment": {
+					"enum": [
+						"Pedestrian",
+						"Witness",
+						"Passenger",
+						"Driver"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Driver error": {
+					"enum": [
+						"Fatigued/asleep",
+						"Inattentive",
+						"Too fast",
+						"Too close",
+						"No signal",
+						"Bad overtaking",
+						"Bad turning",
+						"Using cell phone"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Alcohol/drugs": {
+					"enum": [
+						"Alcohol suspected",
+						"Drugs suspected"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"License number": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Seat belt/helmet": {
+					"enum": [
+						"Seat belt/helmet worn",
+						"Not worn",
+						"Not worn correctly"
+					],
+					"type": "string",
+					"default": ""
+				}
+			},
+			"description": "A person involved in the accident"
+		},
+		"vehicle": {
+			"type": "object",
+			"title": "Vehicle",
+			"required": [
+				"_localId",
+				"Vehicle type"
+			],
+			"properties": {
+				"Make": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Model": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Damage": {
+					"enum": [
+						"None",
+						"Front",
+						"Rear",
+						"Right",
+						"Left",
+						"Roof",
+						"Multiple"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Defect": {
+					"enum": [
+						"None",
+						"Lights",
+						"Brakes",
+						"Steering",
+						"Tires",
+						"Multiple"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Loading": {
+					"enum": [
+						"Legal",
+						"Over loaded",
+						"Unsafe load"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Maneuver": {
+					"enum": [
+						"Left turn",
+						"Right turn",
+						"\"U\" turn",
+						"Cross traffic",
+						"Merging",
+						"Diverging",
+						"Overtaking",
+						"Going ahead",
+						"Reversing",
+						"Sudden start",
+						"Sudden stop",
+						"Parked off road",
+						"Parked on road"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"_localId": {
+					"type": "string",
+					"x-format": "uuid",
+					"x-hidden": true,
+					"pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+				},
+				"Direction": {
+					"enum": [
+						"North",
+						"South",
+						"East",
+						"West"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Plate number": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Vehicle type": {
+					"enum": [
+						"Bicycle",
+						"Pedicab",
+						"Motorcycle",
+						"Tricycle",
+						"Car",
+						"Jeepney",
+						"Bus",
+						"Truck (Rigid)",
+						"Truck (Artic)",
+						"Van",
+						"Animal"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Engine number": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Chassis number": {
+					"type": "string",
+					"x-format": "text"
+				},
+				"Insurance details": {
+					"type": "string",
+					"x-format": "textarea"
+				}
+			},
+			"description": "A vehicle involved in the accident"
+		},
+		"accidentDetails": {
+			"type": "object",
+			"title": "Accident Details",
+			"details": true,
+			"required": [
+				"_localId",
+				"Severity"
+			],
+			"properties": {
+				"Severity": {
+					"enum": [
+						"Fatal",
+						"Injury",
+						"Property"
+					],
+					"type": "string",
+					"isSearchable": true,
+					"default": ""
+				},
+				"_localId": {
+					"type": "string",
+					"x-format": "uuid",
+					"x-hidden": true,
+					"pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+				},
+				"Main cause": {
+					"enum": [
+						"Vehicle defect",
+						"Road defect",
+						"Human error"
+					],
+					"type": "string",
+					"isSearchable": true,
+					"default": ""
+				},
+				"Description": {
+					"type": "string",
+					"x-format": "textarea"
+				},
+				"Num vehicles": {
+					"type": "integer"
+				},
+				"Surface type": {
+					"enum": [
+						"Concrete",
+						"Asphalt",
+						"Gravel",
+						"Earth"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Street lights": {
+					"enum": [
+						"Lit",
+						"Unlit"
+					],
+					"type": "string"
+				},
+				"Collision type": {
+					"enum": [
+						"Head on",
+						"Rear end",
+						"Right angle",
+						"Side swipe",
+						"Overturned vehicle",
+						"Hit object in road",
+						"Hit object off road",
+						"Hit parked vehicle",
+						"Hit pedestrian",
+						"Hit animal"
+					],
+					"type": "string",
+					"isSearchable": true,
+					"default": ""
+				},
+				"Traffic control": {
+					"enum": [
+						"None",
+						"Centerline",
+						"Pedestrian crossing",
+						"School crossing",
+						"Police controlled",
+						"Traffic lights",
+						"Stop sign",
+						"Give way"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Surface condition": {
+					"enum": [
+						"Dry",
+						"Wet",
+						"Muddy",
+						"Flooded"
+					],
+					"type": "string",
+					"default": ""
+				},
+				"Num driver casualties": {
+					"type": "integer"
+				},
+				"Num passenger casualties": {
+					"type": "integer"
+				},
+				"Num pedestrian casualties": {
+					"type": "integer"
+				}
+			},
+			"description": "Details for Accident"
+		}
+	},
+	"description": ""
+}
+

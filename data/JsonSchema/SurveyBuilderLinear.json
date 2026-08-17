@@ -1,0 +1,198 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://wikisphere.org/wiki/JsonSchema:SurveyBuilderLinear",
+	"title": "Survey Builder",
+	"description": "",
+	"type": "object",
+	"x-layout": "tabs",
+	"x-value-converter": "survey",
+	"definitions": {
+		"cell": {
+			"title": "Data Cell",
+			"oneOf": [
+				{
+					"title": "radio",
+					"const": "radio",
+					"x-hidden": true
+				},
+				{
+					"title": "checkbox",
+					"const": "checkbox",
+					"x-hidden": true
+				},
+				{
+					"type": "object",
+					"title": "matrix",
+					"description": "Configuration for data cells",
+					"properties": {
+						"type": {
+							"type": "string",
+							"enum": ["number", "string"],
+							"default": "number"
+						},
+						"input": {
+							"type": "string"
+						},
+						"x-input-config": {
+							"type": "object",
+							"compact": true,
+							"x-collapsible": true,
+							"description": "Configuration options passed to the selected input widget",
+							"x-watch": "input",
+							"links": [
+								{
+									"rel": "describedBy",
+									"href": "JsonSchema:MetaSchema/InputOptions#/definitions/{{input}}"
+								}
+							]
+						}
+					},
+					"allOf": [
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "number"
+									}
+								},
+								"required": ["type"]
+							},
+							"then": {
+								"properties": {
+									"input": {
+										"enum": ["OO.ui.NumberInputWidget", "RangeWidget"]
+									}
+								}
+							}
+						},
+						{
+							"if": {
+								"properties": {
+									"type": {
+										"const": "string"
+									}
+								},
+								"required": ["type"]
+							},
+							"then": {
+								"properties": {
+									"input": {
+										"enum": ["OO.ui.TextInputWidget"]
+									}
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	"properties": {
+		"items": {
+			"type": "array",
+			"x-layout": "tabs",
+			"description": "Each item represents a level of the survey, from outer to inner. Each level includes both rows and columns.",
+			"items": {
+				"type": "object",
+				"x-compact": true,
+				"properties": {
+					"columns": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"title": "Column name",
+									"minLength": 1,
+									"description": "",
+									"x-format": "text",
+									"x-input": "OO.ui.TextInputWidget",
+									"x-input-config": {}
+								},
+								"title": {
+									"type": "string",
+									"title": "Column title",
+									"description": "Display title for the column",
+									"x-format": "text",
+									"x-input": "OO.ui.TextInputWidget",
+									"x-input-config": {}
+								},
+								"required": {
+									"type": "boolean",
+									"title": "required to fill-in ?",
+									"x-input": "OO.ui.CheckboxInputWidget"
+								}
+							},
+							"required": ["name"],
+							"title": "",
+							"description": "",
+							"x-layout": "default",
+							"x-collapsible": false
+							
+						},
+						"title": "",
+						"description": "",
+						"x-layout": "table",
+						"minItems": 1,
+						"x-collapsible": true,
+						"x-collapsible-config": {
+							"collapsed": false
+						}
+					},				
+					"rows": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string",
+									"title": "Row Name",
+									"minLength": 1,
+									"description": "",
+									"x-format": "text",
+									"x-input": "OO.ui.TextInputWidget",
+									"x-input-config": {}
+								},
+								"title": {
+									"type": "string",
+									"title": "Row Title",
+									"description": "Display title for the row",
+									"x-format": "text",
+									"x-input": "OO.ui.TextInputWidget",
+									"x-input-config": {}
+								},
+								"required": {
+									"type": "boolean",
+									"title": "required to fill-in ?",
+									"x-input": "OO.ui.CheckboxInputWidget"
+								}
+							},
+							"required": ["name"],
+							"title": "",
+							"description": "",
+							"x-layout": "default",
+							"x-collapsible": false
+						},
+						"title": "",
+						"description": "",
+						"x-layout": "table",
+						"minItems": 1,
+						"x-collapsible": true,
+						"x-collapsible-config": {
+							"collapsed": false
+						}
+					}
+				},
+				"required": [],
+				"title": "",
+				"description": "",
+				"x-layout": "default"
+			}
+		},
+		"cell": {
+			"$ref": "#/definitions/cell"
+		}
+	},
+	"required": ["items", "cell"]
+}

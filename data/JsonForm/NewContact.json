@@ -1,0 +1,41 @@
+{
+	"name": "New contact",
+	"schema": "Contact",
+	"action": "create",
+	"ugroups": [
+		"user"
+	],
+	"pagename_formula": "Contacts/<fullname>",
+	"overwrite_existing_article_on_create": false,
+	"slot": "jsonforms-data",
+	"edit_categories": true,
+	"default_categories": [
+		"Contact"
+	],
+	"view": "inline",
+	"create_only_fields": [],
+	"edit_freetext": false,
+	"preload": "none",
+	"return": "target",
+	"edit_path": "",
+	"edit_jsonpath": "",
+	"infobox": {
+		"show_infobox": true,
+		"infobox_position": "right",
+		"infobox_template": ""
+	},
+	"display_path": "",
+	"width": "600px",
+	"title": "",
+	"hide_title": false,
+	"editor_options": {
+		"base_options": "MediaWiki:DefaultEditorOptions",
+		"base_script": "MediaWiki:DefaultEditorScript",
+		"validation": "onsubmit",
+		"template": "default",
+		"use_lazy_properties": "threshold",
+		"lazy_properties_threshold": 6
+	},
+	"schema_revision": 0,
+	"edit_schema_revision": 0
+}
