@@ -292,7 +292,7 @@ class SpecialJsonFormsManage extends SpecialPage {
 					$this->par === 'forms' ? 'Core/CreatePageForm' : 'SchemaBuilder/MetaSchema';
 
 				$formDescriptor->width = 'calc(100% - 24px)';
-				$formDescriptor->editor_options->debug = true;
+				$formDescriptor->editor_options->debug = false;
 
 				$formData->formDescriptor = $formDescriptor;
 				$formData->startval = new stdClass();
